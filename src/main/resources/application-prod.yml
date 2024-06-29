@@ -1,0 +1,84 @@
+management:
+  trace:
+    enabled: true
+    include: AUTHORIZATION_HEADER, COOKIE_HEADERS, PRINCIPAL, REMOTE_ADDRESS, REQUEST_HEADERS, RESPONSE_HEADERS, SESSION_ID, TIME_TAKEN
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  level:
+    org.springframework.web.filter.CommonsRequestLogging: DEBUG
+    org.springframework.web.HttpLogging: TRACE
+    reactor.netty.http.server: TRACE
+    reactor.netty.http.client: TRACE
+server:
+  port : 8443
+  forward-headers-strategy: framework
+  servlet:
+    context-path: /ms-user-service
+#hostname: ms-user-service:8081
+spring:
+  application:
+    name: ms-user-service
+  flyway:
+    enabled: true
+    baseline-on-migrate : true
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+#      This config will override the flyway because it will drop the user schema flyway
+#      ddl-auto: create-drop
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://dpg-coh7s5f79t8c73fuij7g-a.oregon-postgres.render.com/ms_user_service
+    username: twitter_fnvb_user
+    password: bWuOk2kJRpU0EtjUAPRoMhx3UU2ZF7uh
+    driverClassName: org.postgresql.Driver
+  rabbitmq:
+    addresses: amqps://gqupsbui:sNGBVBZF4XIuUNvAnYWfOWJ8mUiUTUAr@armadillo.rmq.cloudamqp.com/gqupsbui
+#    host: armadillo.rmq.cloudamqp.com
+#    port: 5672
+#    username: gqupsbui
+#    password: sNGBVBZF4XIuUNvAnYWfOWJ8mUiUTUAr
+  data:
+    redis:
+#      url: rediss://red-coh99qev3ddc73fkf190:ZFBBFUT5GfKDJHH0T5Zo8A1VVny8skwL@singapore-redis.render.com:6379
+      host: singapore-redis.render.com
+      username: red-coh99qev3ddc73fkf190
+      password: ZFBBFUT5GfKDJHH0T5Zo8A1VVny8skwL
+      port: '6379'
+      database: '0'
+      timeout: '60000'
+      ssl:
+        enabled: true
+
+rabbitmq:
+  internal-mail:
+    exchanges: internal.exchange
+    routing-keys: internal.mail.routing-key
+
+jwt:
+  secret: 208bc47b3e1ee5554e388c735b9f234f89ac246e8ce463c8313fc1cff16e760e
+
+service:
+  downstream-url:
+    ms-image-service: https://ms-image-service.onrender.com
+    ms-notification-service: https://ms-notification-service.onrender.com
+
+eureka:
+  instance:
+    hostname: ms-user-service.onrender.com  # Public domain name
+    nonSecurePort: 443  # Standard HTTP port
+    securePortEnabled: true  # Enable if you're using HTTPS
+    preferIpAddress: false  # Use the hostname instead of the IP address
+    statusPageUrlPath: /actuator/info  # Default status page path
+    healthCheckUrlPath: /actuator/health  # Default health check path
+  client:
+    serviceUrl:
+      defaultZone: https://ms-eureka-server-syh2.onrender.com/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  # instance:
+  #   hostname: ${EUREKA_HOST:localhost}
