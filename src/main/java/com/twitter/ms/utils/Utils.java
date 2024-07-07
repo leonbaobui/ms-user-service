@@ -3,7 +3,7 @@ package com.twitter.ms.utils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
 
-import static com.gmail.merikbest2015.constants.PathConstants.AUTH_USER_ID_HEADER;
+import static main.java.com.leon.baobui.constants.PathConstants.AUTH_USER_ID_HEADER;
 
 @UtilityClass
 public class Utils {

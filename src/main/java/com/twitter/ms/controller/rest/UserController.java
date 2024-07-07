@@ -1,22 +1,18 @@
 package com.twitter.ms.controller.rest;
 
-import com.gmail.merikbest2015.dto.CommonResponse;
-import com.gmail.merikbest2015.dto.HeaderResponse;
-import com.gmail.merikbest2015.dto.response.user.UserResponse;
-import com.gmail.merikbest2015.util.AuthUtil;
 import com.twitter.ms.dto.request.UserRequest;
 import com.twitter.ms.dto.response.AuthResponse;
 import com.twitter.ms.dto.response.AuthUserResponse;
 import com.twitter.ms.dto.response.UserProfileResponse;
-import com.twitter.ms.model.User;
 import com.twitter.ms.service.AuthService;
 import com.twitter.ms.service.UserService;
-import com.twitter.ms.utils.Utils;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.web.PageableDefault;
+import main.java.com.leon.baobui.dto.HeaderResponse;
+import main.java.com.leon.baobui.dto.response.user.UserResponse;
+import main.java.com.leon.baobui.util.AuthUtil;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-import static com.gmail.merikbest2015.constants.PathConstants.*;
+import static main.java.com.leon.baobui.constants.PathConstants.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -46,11 +42,12 @@ public class UserController {
         String authUserId = String.valueOf(AuthUtil.getAuthenticatedUserId());
         return ResponseEntity.ok(authService.getUserByToken(authUserId));
     }
+
     @GetMapping(USER_ID)
-    public ResponseEntity<UserProfileResponse> getUserByUserId (
+    public ResponseEntity<UserProfileResponse> getUserByUserId(
             @RequestHeader @Valid HttpHeaders headers,
             @PathVariable(name = "userId") Long userId
-        ) {
+    ) {
         UserProfileResponse userProfileResponse = userService.getUserProfileById(userId);
         return new ResponseEntity<>(userProfileResponse, HttpStatus.OK);
     }
@@ -66,7 +63,7 @@ public class UserController {
     public ResponseEntity<String> uploadImageUserProfile(@RequestPart("file") MultipartFile multipartFile) {
         return ResponseEntity.ok(userService.uploadImageUserProfile(multipartFile));
     }
-    
+
     @PutMapping
     public ResponseEntity<AuthUserResponse> updateUserProfile(@Valid @RequestBody UserRequest userRequest) {
         return ResponseEntity.ok(userService.updateUserProfile(userRequest));

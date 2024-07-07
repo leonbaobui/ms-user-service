@@ -5,9 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import static com.gmail.merikbest2015.constants.ErrorMessage.EMPTY_PASSWORD_CONFIRMATION;
-import static com.gmail.merikbest2015.constants.ErrorMessage.SHORT_PASSWORD;
 import static com.twitter.ms.constants.ValidationContants.INVALID_EMAIL;
+import static main.java.com.leon.baobui.constants.ErrorMessage.EMPTY_PASSWORD_CONFIRMATION;
+import static main.java.com.leon.baobui.constants.ErrorMessage.SHORT_PASSWORD;
 
 @Data
 public class PasswordRegistrationRequest {

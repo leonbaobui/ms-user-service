@@ -1,21 +1,18 @@
 package com.twitter.ms.controller.api;
 
-import com.gmail.merikbest2015.dto.request.IdsRequest;
-import com.gmail.merikbest2015.dto.response.chat.ChatUserParticipantResponse;
-import com.gmail.merikbest2015.dto.response.tweet.TweetAdditionalInfoUserResponse;
-import com.gmail.merikbest2015.dto.response.tweet.TweetAuthorResponse;
-import com.gmail.merikbest2015.dto.response.user.UserResponse;
 import com.twitter.ms.service.UserApiService;
-import com.twitter.ms.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
+import main.java.com.leon.baobui.dto.request.IdsRequest;
+import main.java.com.leon.baobui.dto.response.chat.ChatUserParticipantResponse;
+import main.java.com.leon.baobui.dto.response.tweet.TweetAdditionalInfoUserResponse;
+import main.java.com.leon.baobui.dto.response.tweet.TweetAuthorResponse;
+import main.java.com.leon.baobui.dto.response.user.UserResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.gmail.merikbest2015.constants.PathConstants.*;
+import static main.java.com.leon.baobui.constants.PathConstants.*;
 
 @RestController
 @RequestMapping(value = API_V1_USER)

@@ -1,35 +1,32 @@
 package com.twitter.ms.service;
 
-import com.gmail.merikbest2015.dto.HeaderResponse;
-import com.gmail.merikbest2015.dto.response.user.UserPrincipalResponse;
-import com.gmail.merikbest2015.dto.response.user.UserResponse;
-import com.gmail.merikbest2015.exception.ApiRequestException;
-import com.gmail.merikbest2015.mapper.BasicMapper;
-import com.gmail.merikbest2015.util.AuthUtil;
 import com.twitter.ms.dto.request.UserRequest;
 import com.twitter.ms.dto.response.AuthUserResponse;
 import com.twitter.ms.dto.response.UserProfileResponse;
 import com.twitter.ms.feign.ImageClient;
 import com.twitter.ms.model.User;
-import com.twitter.ms.repository.BlockUserRepository;
 import com.twitter.ms.repository.UserRepository;
 import com.twitter.ms.repository.projection.AuthUserProjection;
 import com.twitter.ms.repository.projection.UserPrincipalView;
 import com.twitter.ms.repository.projection.UserProfileView;
 import com.twitter.ms.repository.projection.UserProjection;
 import lombok.RequiredArgsConstructor;
+import main.java.com.leon.baobui.dto.HeaderResponse;
+import main.java.com.leon.baobui.dto.response.user.UserPrincipalResponse;
+import main.java.com.leon.baobui.dto.response.user.UserResponse;
+import main.java.com.leon.baobui.exception.ApiRequestException;
+import main.java.com.leon.baobui.mapper.BasicMapper;
+import main.java.com.leon.baobui.util.AuthUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-import static com.gmail.merikbest2015.constants.ErrorMessage.USER_NOT_FOUND;
+import static main.java.com.leon.baobui.constants.ErrorMessage.USER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

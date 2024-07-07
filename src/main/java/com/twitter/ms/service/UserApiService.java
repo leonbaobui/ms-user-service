@@ -1,13 +1,5 @@
 package com.twitter.ms.service;
 
-import com.gmail.merikbest2015.dto.request.IdsRequest;
-import com.gmail.merikbest2015.dto.response.chat.ChatUserParticipantResponse;
-import com.gmail.merikbest2015.dto.response.tweet.TweetAdditionalInfoUserResponse;
-import com.gmail.merikbest2015.dto.response.tweet.TweetAuthorResponse;
-import com.gmail.merikbest2015.dto.response.user.UserResponse;
-import com.gmail.merikbest2015.exception.ApiRequestException;
-import com.gmail.merikbest2015.mapper.BasicMapper;
-import com.gmail.merikbest2015.util.AuthUtil;
 import com.twitter.ms.repository.BlockUserRepository;
 import com.twitter.ms.repository.FollowerUserRepository;
 import com.twitter.ms.repository.UserRepository;
@@ -17,6 +9,14 @@ import com.twitter.ms.repository.projection.TweetAuthorProjection;
 import com.twitter.ms.repository.projection.UserProjection;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import main.java.com.leon.baobui.dto.request.IdsRequest;
+import main.java.com.leon.baobui.dto.response.chat.ChatUserParticipantResponse;
+import main.java.com.leon.baobui.dto.response.tweet.TweetAdditionalInfoUserResponse;
+import main.java.com.leon.baobui.dto.response.tweet.TweetAuthorResponse;
+import main.java.com.leon.baobui.dto.response.user.UserResponse;
+import main.java.com.leon.baobui.exception.ApiRequestException;
+import main.java.com.leon.baobui.mapper.BasicMapper;
+import main.java.com.leon.baobui.util.AuthUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +24,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
-import static com.gmail.merikbest2015.constants.ErrorMessage.CHAT_PARTICIPANT_NOT_FOUND;
+import static main.java.com.leon.baobui.constants.ErrorMessage.CHAT_PARTICIPANT_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -33,18 +33,19 @@ public class UserApiService {
     private final UserRepository userRepository;
     private final BlockUserRepository blockUserRepository;
     private final FollowerUserRepository followerUserRepository;
+
     // Validate
     public boolean isUserExists(Long userId) {
         return userRepository.isUserExists(userId);
     }
 
     public boolean isUserHavePrivateProfile(Long userId, HttpServletRequest request) {
-        Long authUserId= AuthUtil.getAuthenticatedUserId(request);
+        Long authUserId = AuthUtil.getAuthenticatedUserId(request);
         return !userRepository.isUserHavePrivateProfile(userId, authUserId);
     }
 
     public boolean isMyProfileBlockedByUser(Long userId, HttpServletRequest request) {
-        Long authUserId= AuthUtil.getAuthenticatedUserId(request);
+        Long authUserId = AuthUtil.getAuthenticatedUserId(request);
         return blockUserRepository.isUserBlocked(userId, authUserId);
     }
 
