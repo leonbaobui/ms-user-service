@@ -1,9 +1,5 @@
 package com.twitter.ms.service;
 
-import com.gmail.merikbest2015.dto.CommonResponse;
-import com.gmail.merikbest2015.dto.request.EmailRequest;
-import com.gmail.merikbest2015.security.JwtProvider;
-import com.twitter.ms.producer.AmqpProducer;
 import com.twitter.ms.dto.request.PasswordRegistrationRequest;
 import com.twitter.ms.dto.request.RegistrationRequest;
 import com.twitter.ms.dto.response.AuthResponse;
@@ -11,9 +7,13 @@ import com.twitter.ms.dto.response.RegistrationResponse;
 import com.twitter.ms.exception.RegistrationException;
 import com.twitter.ms.mapper.UserMapper;
 import com.twitter.ms.model.User;
+import com.twitter.ms.producer.AmqpProducer;
 import com.twitter.ms.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import main.java.com.leon.baobui.dto.CommonResponse;
+import main.java.com.leon.baobui.dto.request.EmailRequest;
+import main.java.com.leon.baobui.security.JwtProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -64,7 +64,7 @@ public class RegistrationService {
                 .orElseThrow(() -> new RegistrationException("Email", "Email is already registered", HttpStatus.FORBIDDEN));
         userRepository.updateActivationCode(otpService.generateOtp(user.getEmail()), user.getId());
         String activationCode = userRepository.findActivationCodeByUserId(user.getId());
-        log.info("Ready to send validation code to email={}",user.getEmail());
+        log.info("Ready to send validation code to email={}", user.getEmail());
         EmailRequest emailRequest = EmailRequest.builder()
                 .to(user.getEmail())
                 .subject("Validation code for Twitter registration")
@@ -81,7 +81,7 @@ public class RegistrationService {
                 .message("Send activation code successfully")
                 .build();
     }
-    
+
     @Transactional
     public CommonResponse validatedActivationCode(String email, String activationCode) {
         Optional<String> otpOptional = otpService.getOtp(email);

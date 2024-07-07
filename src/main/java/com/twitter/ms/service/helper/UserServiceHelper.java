@@ -1,18 +1,17 @@
 package com.twitter.ms.service.helper;
 
-import com.gmail.merikbest2015.exception.ApiRequestException;
-import com.gmail.merikbest2015.util.AuthUtil;
 import com.twitter.ms.model.User;
 import com.twitter.ms.repository.BlockUserRepository;
 import com.twitter.ms.repository.FollowerUserRepository;
 import com.twitter.ms.repository.MuteUserRepository;
 import com.twitter.ms.repository.UserRepository;
-import com.twitter.ms.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
+import main.java.com.leon.baobui.exception.ApiRequestException;
+import main.java.com.leon.baobui.util.AuthUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import static com.gmail.merikbest2015.constants.ErrorMessage.USER_PROFILE_BLOCKED;
+import static main.java.com.leon.baobui.constants.ErrorMessage.USER_PROFILE_BLOCKED;
 
 @Component
 @RequiredArgsConstructor
@@ -21,6 +20,7 @@ public class UserServiceHelper {
     private final MuteUserRepository muteUserRepository;
     private final UserRepository userRepository;
     private final BlockUserRepository blockUserRepository;
+
     public boolean isUserFollowByOtherUser(Long userId) {
         Long authUserId = AuthUtil.getAuthenticatedUserId();
         return followerUserRepository.isUserFollowByOtherUser(authUserId, userId);

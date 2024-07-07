@@ -1,8 +1,7 @@
 package com.twitter.ms.producer;
 
-import com.gmail.merikbest2015.dto.request.EmailRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import main.java.com.leon.baobui.dto.request.EmailRequest;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

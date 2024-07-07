@@ -1,14 +1,10 @@
 package com.twitter.ms.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import static com.gmail.merikbest2015.constants.ErrorMessage.INCORRECT_USERNAME_LENGTH;
+import static main.java.com.leon.baobui.constants.ErrorMessage.INCORRECT_USERNAME_LENGTH;
 
 @Data
 public class UserRequest {

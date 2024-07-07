@@ -1,19 +1,20 @@
 package com.twitter.ms.producer;
 
-import com.gmail.merikbest2015.constants.KafkaTopicConstants;
-import com.gmail.merikbest2015.record.FollowUserEvent;
 import com.twitter.ms.model.User;
 import lombok.RequiredArgsConstructor;
+import main.java.com.leon.baobui.constants.KafkaTopicConstants;
+import main.java.com.leon.baobui.record.FollowUserEvent;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-import static com.gmail.merikbest2015.constants.PathConstants.AUTH_USER_ID_HEADER;
+import static main.java.com.leon.baobui.constants.PathConstants.AUTH_USER_ID_HEADER;
 
 @Component
 @RequiredArgsConstructor
 public class FollowerUserProducer {
     private final KafkaTemplate<String, FollowUserEvent> kafkaTemplate;
+
     public void sendFollowUserEvent(User user, Long authUserId, boolean hasUserFollowed) {
         ProducerRecord<String, FollowUserEvent> producerRecord =
                 new ProducerRecord<>(KafkaTopicConstants.FOLLOW_USER_TOPIC,

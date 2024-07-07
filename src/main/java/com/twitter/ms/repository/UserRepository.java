@@ -1,8 +1,6 @@
 package com.twitter.ms.repository;
 
-import com.gmail.merikbest2015.dto.response.chat.ChatUserParticipantResponse;
 import com.twitter.ms.model.User;
-import com.twitter.ms.repository.projection.ChatUserParticipantProjection;
 import com.twitter.ms.repository.projection.UserProfileView;
 import com.twitter.ms.repository.projection.UserProjection;
 import org.springframework.data.domain.Page;
@@ -20,6 +18,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     //QUERY
     Optional<User> findByEmail(String email);
+
     <T> Optional<T> getUserById(Long userId, Class<T> projections);
 
     <T> Optional<T> getUserByEmail(String email, Class<T> projections);
@@ -36,8 +35,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT " +
             "CASE " +
-                "WHEN count(user) > 0 THEN true " +
-                "ELSE false " +
+            "WHEN count(user) > 0 THEN true " +
+            "ELSE false " +
             "END " +
             "FROM User user " +
             "WHERE user.id = :userId")

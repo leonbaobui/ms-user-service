@@ -2,9 +2,9 @@ package com.twitter.ms.dto.response;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.gmail.merikbest2015.enums.BackgroundColorType;
-import com.gmail.merikbest2015.enums.ColorSchemeType;
 import lombok.Data;
+import main.java.com.leon.baobui.enums.BackgroundColorType;
+import main.java.com.leon.baobui.enums.ColorSchemeType;
 
 import java.time.LocalDateTime;
 

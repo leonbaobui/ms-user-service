@@ -1,14 +1,6 @@
 package com.twitter.ms.service;
 
-import com.gmail.merikbest2015.dto.HeaderResponse;
-import com.gmail.merikbest2015.dto.request.NotificationRequest;
-import com.gmail.merikbest2015.dto.response.notification.NotificationResponse;
-import com.gmail.merikbest2015.dto.response.user.UserResponse;
-import com.gmail.merikbest2015.enums.NotificationType;
-import com.gmail.merikbest2015.mapper.BasicMapper;
-import com.gmail.merikbest2015.util.AuthUtil;
 import com.twitter.ms.exception.DataNotFoundException;
-import com.twitter.ms.feign.NotificationClient;
 import com.twitter.ms.model.User;
 import com.twitter.ms.producer.FollowerUserProducer;
 import com.twitter.ms.repository.FollowerUserRepository;
@@ -16,18 +8,22 @@ import com.twitter.ms.repository.UserRepository;
 import com.twitter.ms.repository.projection.UserProjection;
 import com.twitter.ms.service.helper.UserServiceHelper;
 import lombok.RequiredArgsConstructor;
+import main.java.com.leon.baobui.dto.HeaderResponse;
+import main.java.com.leon.baobui.dto.request.NotificationRequest;
+import main.java.com.leon.baobui.dto.response.user.UserResponse;
+import main.java.com.leon.baobui.enums.NotificationType;
+import main.java.com.leon.baobui.mapper.BasicMapper;
+import main.java.com.leon.baobui.util.AuthUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class FollowerUserService {
-//    private final NotificationClient notificationClient;
+    //    private final NotificationClient notificationClient;
     private final FollowerUserRepository followerUserRepository;
     private final UserRepository userRepository;
     private final UserServiceHelper userServiceHelper;
@@ -43,9 +39,9 @@ public class FollowerUserService {
         Long authUserId = AuthUtil.getAuthenticatedUserId();
         User user = userRepository.getUserById(userId, User.class)
                 .orElseThrow(() -> new DataNotFoundException("userId", "User not found", HttpStatus.NOT_FOUND));
-        User authUser  = authenticationService.getAuthenticatedUser(authUserId);
+        User authUser = authenticationService.getAuthenticatedUser(authUserId);
         userServiceHelper.checkIsUserBlocked(user, authUser);
-        boolean hasUserFollowed  = false;
+        boolean hasUserFollowed = false;
         // Don't confuse between subscribers and follower!
         if (followerUserRepository.isFollower(authUserId, userId)) {
             authUser.getFollowers().remove(user);
@@ -60,7 +56,7 @@ public class FollowerUserService {
                         .notifiedUserId(userId)
                         .build();
 //                notificationClient.sendNotification(request);
-                hasUserFollowed  = true;
+                hasUserFollowed = true;
             } else {
                 followerUserRepository.addFollowerRequest(authUserId, userId);
             }
@@ -70,13 +66,13 @@ public class FollowerUserService {
     }
 
     public HeaderResponse<UserResponse> getFollowing(Long userId, Pageable pageable) {
-        Page<UserProjection> userProjections  = followerUserRepository.getFollowingById(userId, pageable);
-        return basicMapper.getHeaderResponse(userProjections, UserResponse.class) ;
+        Page<UserProjection> userProjections = followerUserRepository.getFollowingById(userId, pageable);
+        return basicMapper.getHeaderResponse(userProjections, UserResponse.class);
     }
 
     public HeaderResponse<UserResponse> getFollowers(Long userId, Pageable pageable) {
-        Page<UserProjection> userProjections  = followerUserRepository.getFollowersById(userId, pageable);
-        return basicMapper.getHeaderResponse(userProjections, UserResponse.class) ;
+        Page<UserProjection> userProjections = followerUserRepository.getFollowersById(userId, pageable);
+        return basicMapper.getHeaderResponse(userProjections, UserResponse.class);
     }
 
 }
