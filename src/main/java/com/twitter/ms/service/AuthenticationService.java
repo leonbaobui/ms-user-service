@@ -1,9 +1,9 @@
 package com.twitter.ms.service;
 
+import lombok.RequiredArgsConstructor;
 import com.twitter.ms.exception.DataNotFoundException;
 import com.twitter.ms.model.User;
 import com.twitter.ms.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 

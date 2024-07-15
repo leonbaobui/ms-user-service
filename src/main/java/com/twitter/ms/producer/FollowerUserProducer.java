@@ -1,12 +1,12 @@
 package com.twitter.ms.producer;
 
-import com.twitter.ms.model.User;
 import lombok.RequiredArgsConstructor;
-import main.java.com.leon.baobui.constants.KafkaTopicConstants;
-import main.java.com.leon.baobui.record.FollowUserEvent;
+import com.twitter.ms.model.User;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
+import main.java.com.leon.baobui.constants.KafkaTopicConstants;
+import main.java.com.leon.baobui.record.FollowUserEvent;
 
 import static main.java.com.leon.baobui.constants.PathConstants.AUTH_USER_ID_HEADER;
 

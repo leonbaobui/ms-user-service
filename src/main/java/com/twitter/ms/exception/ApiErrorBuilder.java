@@ -1,11 +1,11 @@
 package com.twitter.ms.exception;
 
+import java.util.List;
+
 import lombok.Builder;
 import lombok.experimental.UtilityClass;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 @Builder
 @UtilityClass

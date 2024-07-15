@@ -1,18 +1,37 @@
 package com.twitter.ms.controller.api;
 
+import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import com.twitter.ms.service.UserApiService;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import main.java.com.leon.baobui.dto.request.IdsRequest;
 import main.java.com.leon.baobui.dto.response.chat.ChatUserParticipantResponse;
 import main.java.com.leon.baobui.dto.response.tweet.TweetAdditionalInfoUserResponse;
 import main.java.com.leon.baobui.dto.response.tweet.TweetAuthorResponse;
 import main.java.com.leon.baobui.dto.response.user.UserResponse;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-import static main.java.com.leon.baobui.constants.PathConstants.*;
+import static main.java.com.leon.baobui.constants.PathConstants.API_V1_USER;
+import static main.java.com.leon.baobui.constants.PathConstants.CHAT_PARTICIPANT_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.IS_EXISTS_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.IS_FOLLOWED_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.IS_MY_PROFILE_BLOCKED_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.IS_PRIVATE_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.MEDIA_COUNT;
+import static main.java.com.leon.baobui.constants.PathConstants.TWEET_ADDITIONAL_INFO_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.TWEET_AUTHOR_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.TWEET_COUNT;
+import static main.java.com.leon.baobui.constants.PathConstants.TWEET_PINNED_TWEET_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.TWEET_PINNED_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.VALID_IDS;
 
 @RestController
 @RequestMapping(value = API_V1_USER)

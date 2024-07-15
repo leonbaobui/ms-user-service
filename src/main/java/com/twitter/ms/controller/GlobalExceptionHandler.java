@@ -1,11 +1,11 @@
 package com.twitter.ms.controller;
 
 import com.twitter.ms.exception.RegistrationException;
-import main.java.com.leon.baobui.dto.CommonResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import main.java.com.leon.baobui.dto.CommonResponse;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

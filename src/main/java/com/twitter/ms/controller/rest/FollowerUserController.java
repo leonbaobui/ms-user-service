@@ -1,9 +1,9 @@
 package com.twitter.ms.controller.rest;
 
-import com.twitter.ms.service.FollowerUserService;
+import java.util.List;
+
 import lombok.RequiredArgsConstructor;
-import main.java.com.leon.baobui.dto.HeaderResponse;
-import main.java.com.leon.baobui.dto.response.user.UserResponse;
+import com.twitter.ms.service.FollowerUserService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import main.java.com.leon.baobui.dto.HeaderResponse;
+import main.java.com.leon.baobui.dto.response.user.UserResponse;
 
-import java.util.List;
-
-import static main.java.com.leon.baobui.constants.PathConstants.*;
+import static main.java.com.leon.baobui.constants.PathConstants.FOLLOWERS_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.FOLLOWING_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.FOLLOW_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.UI_V1;
+import static main.java.com.leon.baobui.constants.PathConstants.USER;
 
 @RestController
 @RequiredArgsConstructor

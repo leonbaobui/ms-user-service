@@ -1,5 +1,10 @@
 package com.twitter.ms.service;
 
+import java.util.Map;
+import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import com.twitter.ms.dto.request.PasswordRegistrationRequest;
 import com.twitter.ms.dto.request.RegistrationRequest;
 import com.twitter.ms.dto.response.AuthResponse;
@@ -9,18 +14,13 @@ import com.twitter.ms.mapper.UserMapper;
 import com.twitter.ms.model.User;
 import com.twitter.ms.producer.AmqpProducer;
 import com.twitter.ms.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import main.java.com.leon.baobui.dto.CommonResponse;
-import main.java.com.leon.baobui.dto.request.EmailRequest;
-import main.java.com.leon.baobui.security.JwtProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Map;
-import java.util.Optional;
+import main.java.com.leon.baobui.dto.CommonResponse;
+import main.java.com.leon.baobui.dto.request.EmailRequest;
+import main.java.com.leon.baobui.security.JwtProvider;
 
 @Service
 @RequiredArgsConstructor
@@ -61,7 +61,10 @@ public class RegistrationService {
     @Transactional
     public CommonResponse sendRegistrationCode(String email) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RegistrationException("Email", "Email is already registered", HttpStatus.FORBIDDEN));
+                .orElseThrow(
+                        () -> new RegistrationException("Email",
+                                "Email is already registered",
+                                HttpStatus.FORBIDDEN));
         userRepository.updateActivationCode(otpService.generateOtp(user.getEmail()), user.getId());
         String activationCode = userRepository.findActivationCodeByUserId(user.getId());
         log.info("Ready to send validation code to email={}", user.getEmail());
@@ -85,7 +88,10 @@ public class RegistrationService {
     @Transactional
     public CommonResponse validatedActivationCode(String email, String activationCode) {
         Optional<String> otpOptional = otpService.getOtp(email);
-        String otp = otpOptional.orElseThrow(() -> new RegistrationException("Activation code", "Activation code not found/or passed TTL", HttpStatus.FORBIDDEN));
+        String otp = otpOptional.orElseThrow(
+                () -> new RegistrationException("Activation code",
+                        "Activation code not found/or passed TTL",
+                        HttpStatus.FORBIDDEN));
         if (!otp.equals(activationCode)) {
             throw new RegistrationException("Activation code", "Activation code invalid", HttpStatus.FORBIDDEN);
         }

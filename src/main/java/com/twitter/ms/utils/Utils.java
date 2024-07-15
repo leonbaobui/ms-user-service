@@ -1,7 +1,7 @@
 package com.twitter.ms.utils;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
+import jakarta.servlet.http.HttpServletRequest;
 
 import static main.java.com.leon.baobui.constants.PathConstants.AUTH_USER_ID_HEADER;
 
