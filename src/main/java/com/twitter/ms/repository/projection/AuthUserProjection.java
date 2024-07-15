@@ -1,10 +1,10 @@
 package com.twitter.ms.repository.projection;
 
+import java.time.LocalDateTime;
+
+import org.springframework.beans.factory.annotation.Value;
 import main.java.com.leon.baobui.enums.BackgroundColorType;
 import main.java.com.leon.baobui.enums.ColorSchemeType;
-import org.springframework.beans.factory.annotation.Value;
-
-import java.time.LocalDateTime;
 
 public interface AuthUserProjection {
     Long getId();

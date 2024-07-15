@@ -1,9 +1,9 @@
 package com.twitter.ms.dto.request;
 
+import lombok.Data;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
 
 import static com.twitter.ms.constants.ValidationContants.INVALID_EMAIL;
 import static main.java.com.leon.baobui.constants.ErrorMessage.EMPTY_PASSWORD_CONFIRMATION;

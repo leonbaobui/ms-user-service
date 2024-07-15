@@ -1,12 +1,12 @@
 package com.twitter.ms.dto.response;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDateTime;
+
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import main.java.com.leon.baobui.enums.BackgroundColorType;
 import main.java.com.leon.baobui.enums.ColorSchemeType;
-
-import java.time.LocalDateTime;
 
 @Data
 public class AuthUserResponse {

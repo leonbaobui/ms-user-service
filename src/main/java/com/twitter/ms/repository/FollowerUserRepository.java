@@ -10,8 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface FollowerUserRepository extends JpaRepository<User, Long> {
     @Query("SELECT CASE WHEN count(user) > 0 THEN true ELSE false END " +
@@ -20,13 +18,13 @@ public interface FollowerUserRepository extends JpaRepository<User, Long> {
             "WHERE user.id = :authUserId AND follower.id = :userId")
     boolean isUserFollowByOtherUser(@Param("authUserId") Long authUserId, @Param("userId") Long userId);
 
-    @Query( "SELECT user " +
+    @Query("SELECT user " +
             "FROM User user " +
             "LEFT JOIN user.followers followers " +
             "WHERE followers.id = :userId")
     Page<UserProjection> getFollowingById(@Param("userId") Long userId, Pageable pageable);
 
-    @Query( "SELECT user " +
+    @Query("SELECT user " +
             "FROM User user " +
             "LEFT JOIN user.following following " +
             "WHERE following.id = :userId")

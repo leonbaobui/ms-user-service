@@ -1,5 +1,6 @@
 package com.twitter.ms.service;
 
+import lombok.RequiredArgsConstructor;
 import com.twitter.ms.exception.DataNotFoundException;
 import com.twitter.ms.model.User;
 import com.twitter.ms.producer.FollowerUserProducer;
@@ -7,18 +8,17 @@ import com.twitter.ms.repository.FollowerUserRepository;
 import com.twitter.ms.repository.UserRepository;
 import com.twitter.ms.repository.projection.UserProjection;
 import com.twitter.ms.service.helper.UserServiceHelper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import main.java.com.leon.baobui.dto.HeaderResponse;
 import main.java.com.leon.baobui.dto.request.NotificationRequest;
 import main.java.com.leon.baobui.dto.response.user.UserResponse;
 import main.java.com.leon.baobui.enums.NotificationType;
 import main.java.com.leon.baobui.mapper.BasicMapper;
 import main.java.com.leon.baobui.util.AuthUtil;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor

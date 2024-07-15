@@ -1,15 +1,15 @@
 package com.twitter.ms.service.helper;
 
+import lombok.RequiredArgsConstructor;
 import com.twitter.ms.model.User;
 import com.twitter.ms.repository.BlockUserRepository;
 import com.twitter.ms.repository.FollowerUserRepository;
 import com.twitter.ms.repository.MuteUserRepository;
 import com.twitter.ms.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import main.java.com.leon.baobui.exception.ApiRequestException;
-import main.java.com.leon.baobui.util.AuthUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import main.java.com.leon.baobui.exception.ApiRequestException;
+import main.java.com.leon.baobui.util.AuthUtil;
 
 import static main.java.com.leon.baobui.constants.ErrorMessage.USER_PROFILE_BLOCKED;
 

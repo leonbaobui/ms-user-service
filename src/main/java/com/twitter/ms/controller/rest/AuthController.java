@@ -1,5 +1,6 @@
 package com.twitter.ms.controller.rest;
 
+import lombok.RequiredArgsConstructor;
 import com.twitter.ms.dto.request.AuthRequest;
 import com.twitter.ms.dto.request.PasswordRegistrationRequest;
 import com.twitter.ms.dto.request.RegistrationEmailCodeProcessRequest;
@@ -8,14 +9,24 @@ import com.twitter.ms.dto.response.AuthResponse;
 import com.twitter.ms.dto.response.RegistrationResponse;
 import com.twitter.ms.service.AuthService;
 import com.twitter.ms.service.RegistrationService;
-import lombok.RequiredArgsConstructor;
-import main.java.com.leon.baobui.dto.CommonResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import main.java.com.leon.baobui.dto.CommonResponse;
 
-import static main.java.com.leon.baobui.constants.PathConstants.*;
+import static main.java.com.leon.baobui.constants.PathConstants.LOGIN;
+import static main.java.com.leon.baobui.constants.PathConstants.REGISTRATION_ACTIVATE_CODE;
+import static main.java.com.leon.baobui.constants.PathConstants.REGISTRATION_CHECK;
+import static main.java.com.leon.baobui.constants.PathConstants.REGISTRATION_CODE;
+import static main.java.com.leon.baobui.constants.PathConstants.REGISTRATION_CONFIRM;
+import static main.java.com.leon.baobui.constants.PathConstants.UI_V1;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,7 +56,8 @@ public class AuthController {
     public ResponseEntity<CommonResponse> sendRegistrationCodeController(
             @RequestHeader HttpHeaders headers,
             @RequestBody RegistrationEmailCodeProcessRequest registrationEmailCodeProcessRequest) {
-        CommonResponse commonResponse = registrationService.sendRegistrationCode(registrationEmailCodeProcessRequest.getEmail());
+        CommonResponse commonResponse =
+                registrationService.sendRegistrationCode(registrationEmailCodeProcessRequest.getEmail());
         return new ResponseEntity<>(commonResponse, HttpStatus.OK);
     }
 

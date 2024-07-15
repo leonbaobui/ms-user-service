@@ -1,8 +1,8 @@
 package com.twitter.ms.dto.request;
 
+import lombok.Data;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
 
 import static main.java.com.leon.baobui.constants.ErrorMessage.INCORRECT_USERNAME_LENGTH;
 

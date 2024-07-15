@@ -1,5 +1,8 @@
 package com.twitter.ms.controller.rest;
 
+import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import com.twitter.ms.dto.request.UserRequest;
 import com.twitter.ms.dto.response.AuthResponse;
 import com.twitter.ms.dto.response.AuthUserResponse;
@@ -7,21 +10,33 @@ import com.twitter.ms.dto.response.UserProfileResponse;
 import com.twitter.ms.service.AuthService;
 import com.twitter.ms.service.UserService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import main.java.com.leon.baobui.dto.HeaderResponse;
-import main.java.com.leon.baobui.dto.response.user.UserResponse;
-import main.java.com.leon.baobui.util.AuthUtil;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import main.java.com.leon.baobui.dto.HeaderResponse;
+import main.java.com.leon.baobui.dto.response.user.UserResponse;
+import main.java.com.leon.baobui.util.AuthUtil;
 
-import java.util.List;
-
-import static main.java.com.leon.baobui.constants.PathConstants.*;
+import static main.java.com.leon.baobui.constants.PathConstants.ALL;
+import static main.java.com.leon.baobui.constants.PathConstants.SEARCH_USERNAME;
+import static main.java.com.leon.baobui.constants.PathConstants.START;
+import static main.java.com.leon.baobui.constants.PathConstants.TOKEN;
+import static main.java.com.leon.baobui.constants.PathConstants.UI_V1;
+import static main.java.com.leon.baobui.constants.PathConstants.UPLOAD;
+import static main.java.com.leon.baobui.constants.PathConstants.USER;
+import static main.java.com.leon.baobui.constants.PathConstants.USER_ID;
 
 @RestController
 @RequiredArgsConstructor

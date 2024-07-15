@@ -1,5 +1,8 @@
 package com.twitter.ms.service;
 
+import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import com.twitter.ms.repository.BlockUserRepository;
 import com.twitter.ms.repository.FollowerUserRepository;
 import com.twitter.ms.repository.UserRepository;
@@ -8,7 +11,10 @@ import com.twitter.ms.repository.projection.TweetAdditionalInfoUserProjection;
 import com.twitter.ms.repository.projection.TweetAuthorProjection;
 import com.twitter.ms.repository.projection.UserProjection;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import main.java.com.leon.baobui.dto.request.IdsRequest;
 import main.java.com.leon.baobui.dto.response.chat.ChatUserParticipantResponse;
 import main.java.com.leon.baobui.dto.response.tweet.TweetAdditionalInfoUserResponse;
@@ -17,12 +23,6 @@ import main.java.com.leon.baobui.dto.response.user.UserResponse;
 import main.java.com.leon.baobui.exception.ApiRequestException;
 import main.java.com.leon.baobui.mapper.BasicMapper;
 import main.java.com.leon.baobui.util.AuthUtil;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
-
-import java.util.List;
 
 import static main.java.com.leon.baobui.constants.ErrorMessage.CHAT_PARTICIPANT_NOT_FOUND;
 
@@ -102,7 +102,8 @@ public class UserApiService {
     }
 
     public ChatUserParticipantResponse getChatUserParticipant(Long userId) {
-        ChatUserParticipantProjection chatUserParticipantProjection = userRepository.getUserById(userId, ChatUserParticipantProjection.class).get();
+        ChatUserParticipantProjection chatUserParticipantProjection =
+                userRepository.getUserById(userId, ChatUserParticipantProjection.class).get();
         return basicMapper.convertToResponse(chatUserParticipantProjection, ChatUserParticipantResponse.class);
     }
 
