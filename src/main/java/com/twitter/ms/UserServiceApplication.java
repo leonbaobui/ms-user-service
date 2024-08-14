@@ -10,14 +10,12 @@ import main.java.com.leon.baobui.configuration.SharedConfiguration;
 import main.java.com.leon.baobui.mapper.BasicMapper;
 import main.java.com.leon.baobui.security.JwtProvider;
 
-@SpringBootApplication(scanBasePackages = {"com.twitter.ms"})
+@SpringBootApplication(scanBasePackages = {"com.twitter.ms", "main.java.com.leon.baobui"})
 @EnableAutoConfiguration
 @EnableFeignClients
 @EnableDiscoveryClient
 @Import({JwtProvider.class, BasicMapper.class, SharedConfiguration.class})
 public class UserServiceApplication {
-    int a = 10;
-
     public static void main(String[] args) {
         SpringApplication.run(UserServiceApplication.class, args);
     }
