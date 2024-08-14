@@ -1,14 +1,15 @@
 package com.twitter.ms.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-import static com.twitter.ms.constants.ValidationContants.*;
+import static com.twitter.ms.constants.ValidationContants.INVALID_EMAIL;
+import static com.twitter.ms.constants.ValidationContants.INVALID_NAME_BLANK_MSG;
+import static com.twitter.ms.constants.ValidationContants.INVALID_NAME_SIZE_MSG;
 
 @Data
 @Getter

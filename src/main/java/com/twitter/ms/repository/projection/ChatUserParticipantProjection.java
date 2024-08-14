@@ -1,6 +1,5 @@
 package com.twitter.ms.repository.projection;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Value;
 
 public interface ChatUserParticipantProjection {

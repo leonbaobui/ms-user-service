@@ -1,5 +1,8 @@
 package com.twitter.ms.service;
 
+import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import com.twitter.ms.dto.request.UserRequest;
 import com.twitter.ms.dto.response.AuthUserResponse;
 import com.twitter.ms.dto.response.UserProfileResponse;
@@ -10,21 +13,18 @@ import com.twitter.ms.repository.projection.AuthUserProjection;
 import com.twitter.ms.repository.projection.UserPrincipalView;
 import com.twitter.ms.repository.projection.UserProfileView;
 import com.twitter.ms.repository.projection.UserProjection;
-import lombok.RequiredArgsConstructor;
-import main.java.com.leon.baobui.dto.HeaderResponse;
-import main.java.com.leon.baobui.dto.response.user.UserPrincipalResponse;
-import main.java.com.leon.baobui.dto.response.user.UserResponse;
-import main.java.com.leon.baobui.exception.ApiRequestException;
-import main.java.com.leon.baobui.mapper.BasicMapper;
-import main.java.com.leon.baobui.util.AuthUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
+import main.java.com.leon.baobui.dto.HeaderResponse;
+import main.java.com.leon.baobui.dto.response.user.UserPrincipalResponse;
+import main.java.com.leon.baobui.dto.response.user.UserResponse;
+import main.java.com.leon.baobui.exception.ApiRequestException;
+import main.java.com.leon.baobui.mapper.BasicMapper;
+import main.java.com.leon.baobui.util.AuthUtil;
 
 import static main.java.com.leon.baobui.constants.ErrorMessage.USER_NOT_FOUND;
 
@@ -87,7 +87,8 @@ public class UserService {
     }
 
     public List<UserResponse> searchUsersByUsername(String username, Pageable pageable) {
-        Page<UserProjection> userProjectionPage = userRepository.getUserByUsername(username, pageable, UserProjection.class);
+        Page<UserProjection> userProjectionPage =
+                userRepository.getUserByUsername(username, pageable, UserProjection.class);
         return basicMapper.convertToResponseList(userProjectionPage.getContent(), UserResponse.class);
     }
 }

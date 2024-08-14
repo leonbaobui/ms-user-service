@@ -1,5 +1,8 @@
 package com.twitter.ms.repository;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.twitter.ms.model.User;
 import com.twitter.ms.repository.projection.UserProfileView;
 import com.twitter.ms.repository.projection.UserProjection;
@@ -10,9 +13,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -100,7 +100,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT user FROM User user " +
             "LEFT JOIN user.userBlockedList userBlockedList " +
             "WHERE userBlockedList.id = :authUserId AND user.id IN :userIds")
-    List<Long> getUserIdsWhoBlockedMyProfile(@Param("userIds") List<Long> userIds, @Param("authUserId") Long authUserId);
+    List<Long> getUserIdsWhoBlockedMyProfile(@Param("userIds") List<Long> userIds,
+                                             @Param("authUserId") Long authUserId);
 
     @Query("SELECT user.id FROM User user " +
             "LEFT JOIN user.following following " +
