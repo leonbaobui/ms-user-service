@@ -69,7 +69,7 @@ service:
 
 eureka:
   instance:
-    hostname: ms-user-service.onrender.com  # Public domain name
+    hostname: ms-user-service-ndm5.onrender.com  # Public domain name
     nonSecurePort: 443  # Standard HTTP port
     securePortEnabled: true  # Enable if you're using HTTPS
     preferIpAddress: false  # Use the hostname instead of the IP address
@@ -77,7 +77,7 @@ eureka:
     healthCheckUrlPath: /actuator/health  # Default health check path
   client:
     serviceUrl:
-      defaultZone: https://ms-eureka-server-syh2.onrender.com/eureka
+      defaultZone: https://ms-eureka-server-2cvn.onrender.com/eureka
     fetch-registry: true
     register-with-eureka: true
   # instance:
