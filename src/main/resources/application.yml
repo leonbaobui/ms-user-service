@@ -35,6 +35,12 @@ spring:
       database: '0'
       timeout: '60000'
 
+infrastructure:
+  services:
+    feign:
+      request-interceptor:
+        enabled: true
+
 rabbitmq:
   internal-mail:
     exchanges: internal.exchange
