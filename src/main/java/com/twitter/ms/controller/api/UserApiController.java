@@ -25,6 +25,7 @@ import static main.java.com.leon.baobui.constants.PathConstants.IS_EXISTS_USER_I
 import static main.java.com.leon.baobui.constants.PathConstants.IS_FOLLOWED_USER_ID;
 import static main.java.com.leon.baobui.constants.PathConstants.IS_MY_PROFILE_BLOCKED_USER_ID;
 import static main.java.com.leon.baobui.constants.PathConstants.IS_PRIVATE_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.LIKE_COUNT;
 import static main.java.com.leon.baobui.constants.PathConstants.MEDIA_COUNT;
 import static main.java.com.leon.baobui.constants.PathConstants.NOTIFICATION_USER_ID;
 import static main.java.com.leon.baobui.constants.PathConstants.NOTIFICATION_USER_USER_ID;
@@ -107,6 +108,11 @@ public class UserApiController {
     @GetMapping(USER_ID)
     public UserResponse getUserById(@PathVariable("userId") Long userId) {
         return userService.getUserResponseById(userId);
+    }
+
+    @PutMapping(LIKE_COUNT)
+    public void updateLikeCount(@PathVariable("increaseCount") boolean increaseCount) {
+        userService.updateLikeCount(increaseCount);
     }
 
     @GetMapping(NOTIFICATION_USER_ID)

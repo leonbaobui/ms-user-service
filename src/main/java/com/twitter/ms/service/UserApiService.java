@@ -116,6 +116,12 @@ public class UserApiService {
     }
 
     @Transactional
+    public void updateLikeCount(boolean increaseCount) {
+        Long userId = AuthUtil.getAuthenticatedUserId();
+        userRepository.updateLikeCount(increaseCount, userId);
+    }
+
+    @Transactional
     public void increaseNotificationsCount(Long userId) {
         userRepository.increaseNotificationsCount(userId);
     }
