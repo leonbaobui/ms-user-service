@@ -7,6 +7,7 @@ import com.twitter.ms.repository.BlockUserRepository;
 import com.twitter.ms.repository.FollowerUserRepository;
 import com.twitter.ms.repository.UserRepository;
 import com.twitter.ms.repository.projection.ChatUserParticipantProjection;
+import com.twitter.ms.repository.projection.NotificationUserProjection;
 import com.twitter.ms.repository.projection.TweetAdditionalInfoUserProjection;
 import com.twitter.ms.repository.projection.TweetAuthorProjection;
 import com.twitter.ms.repository.projection.UserProjection;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import main.java.com.leon.baobui.dto.request.IdsRequest;
 import main.java.com.leon.baobui.dto.response.chat.ChatUserParticipantResponse;
+import main.java.com.leon.baobui.dto.response.notification.NotificationUserResponse;
 import main.java.com.leon.baobui.dto.response.tweet.TweetAdditionalInfoUserResponse;
 import main.java.com.leon.baobui.dto.response.tweet.TweetAuthorResponse;
 import main.java.com.leon.baobui.dto.response.user.UserResponse;
@@ -111,5 +113,15 @@ public class UserApiService {
         UserProjection userProjection = userRepository.getUserById(userId, UserProjection.class)
                 .orElseThrow(() -> new ApiRequestException(CHAT_PARTICIPANT_NOT_FOUND, HttpStatus.NOT_FOUND));
         return basicMapper.convertToResponse(userProjection, UserResponse.class);
+    }
+
+    @Transactional
+    public void increaseNotificationsCount(Long userId) {
+        userRepository.increaseNotificationsCount(userId);
+    }
+
+    public NotificationUserResponse getNotificationUser(Long userId) {
+        NotificationUserProjection user = userRepository.getUserById(userId, NotificationUserProjection.class).get();
+        return basicMapper.convertToResponse(user, NotificationUserResponse.class);
     }
 }

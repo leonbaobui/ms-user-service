@@ -114,5 +114,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("UPDATE User user SET user.pinnedTweetId = :tweetId WHERE user.id = :userId")
     void updatePinnedTweetId(@Param("tweetId") Long tweetId, @Param("userId") Long userId);
-
+    @Modifying
+    @Query("UPDATE User user SET user.notificationsCount = user.notificationsCount + 1 WHERE user.id = :userId")
+    void increaseNotificationsCount(@Param("userId") Long userId);
 }
