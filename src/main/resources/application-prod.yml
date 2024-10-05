@@ -32,9 +32,9 @@ spring:
 #      ddl-auto: create-drop
   datasource:
     platform: postgres
-    url: jdbc:postgresql://dpg-cqufc4bqf0us73abvkc0-a.oregon-postgres.render.com/ms_user_service
-    username: twitter_db_user
-    password: QuWe0Z3z8pyAIkIOGWpmS84Xk1wv2KpF
+    url: jdbc:postgresql://twitter-db-tranbaotin270402-c9d4.i.aivencloud.com:27368/defaultdb?sslmode=require
+    username: ${POSTGRESQL_USERNAME}
+    password: ${POSTGRESQL_PASSWORD}
     driverClassName: org.postgresql.Driver
   rabbitmq:
     addresses: amqps://gqupsbui:sNGBVBZF4XIuUNvAnYWfOWJ8mUiUTUAr@armadillo.rmq.cloudamqp.com/gqupsbui
@@ -46,8 +46,8 @@ spring:
     redis:
 #      url: rediss://red-coh99qev3ddc73fkf190:ZFBBFUT5GfKDJHH0T5Zo8A1VVny8skwL@singapore-redis.render.com:6379
       host: singapore-redis.render.com
-      username: red-coh99qev3ddc73fkf190
-      password: ZFBBFUT5GfKDJHH0T5Zo8A1VVny8skwL
+      username: ${REDIS_USERNAME}
+      password: ${REDIS_PASSWORD}
       port: '6379'
       database: '0'
       timeout: '60000'
@@ -64,12 +64,12 @@ jwt:
 
 service:
   downstream-url:
-    ms-image-service: https://ms-image-service.onrender.com
+    ms-image-service: https://ms-image-service-kfnp.onrender.com
     ms-notification-service: https://ms-notification-service.onrender.com
 
 eureka:
   instance:
-    hostname: ms-user-service.onrender.com  # Public domain name
+    hostname: ms-user-service-ndm5.onrender.com  # Public domain name
     nonSecurePort: 443  # Standard HTTP port
     securePortEnabled: true  # Enable if you're using HTTPS
     preferIpAddress: false  # Use the hostname instead of the IP address
@@ -77,7 +77,7 @@ eureka:
     healthCheckUrlPath: /actuator/health  # Default health check path
   client:
     serviceUrl:
-      defaultZone: https://ms-eureka-server-syh2.onrender.com/eureka
+      defaultZone: https://ms-eureka-server-2cvn.onrender.com/eureka
     fetch-registry: true
     register-with-eureka: true
   # instance:

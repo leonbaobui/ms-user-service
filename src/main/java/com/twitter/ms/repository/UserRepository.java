@@ -114,5 +114,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("UPDATE User user SET user.pinnedTweetId = :tweetId WHERE user.id = :userId")
     void updatePinnedTweetId(@Param("tweetId") Long tweetId, @Param("userId") Long userId);
+    @Modifying
+    @Query("UPDATE User user SET user.notificationsCount = user.notificationsCount + 1 WHERE user.id = :userId")
+    void increaseNotificationsCount(@Param("userId") Long userId);
+
+    @Modifying
+    @Query("UPDATE User user SET user.likeCount = " +
+            "CASE WHEN :increaseCount = true THEN (user.likeCount + 1) " +
+            "ELSE (user.likeCount - 1) END " +
+            "WHERE user.id = :userId")
+    void updateLikeCount(@Param("increaseCount") boolean increaseCount, @Param("userId") Long userId);
 
 }

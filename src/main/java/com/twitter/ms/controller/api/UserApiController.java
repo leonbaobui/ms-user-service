@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import main.java.com.leon.baobui.dto.request.IdsRequest;
 import main.java.com.leon.baobui.dto.response.chat.ChatUserParticipantResponse;
+import main.java.com.leon.baobui.dto.response.notification.NotificationUserResponse;
 import main.java.com.leon.baobui.dto.response.tweet.TweetAdditionalInfoUserResponse;
 import main.java.com.leon.baobui.dto.response.tweet.TweetAuthorResponse;
 import main.java.com.leon.baobui.dto.response.user.UserResponse;
@@ -24,7 +25,10 @@ import static main.java.com.leon.baobui.constants.PathConstants.IS_EXISTS_USER_I
 import static main.java.com.leon.baobui.constants.PathConstants.IS_FOLLOWED_USER_ID;
 import static main.java.com.leon.baobui.constants.PathConstants.IS_MY_PROFILE_BLOCKED_USER_ID;
 import static main.java.com.leon.baobui.constants.PathConstants.IS_PRIVATE_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.LIKE_COUNT;
 import static main.java.com.leon.baobui.constants.PathConstants.MEDIA_COUNT;
+import static main.java.com.leon.baobui.constants.PathConstants.NOTIFICATION_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.NOTIFICATION_USER_USER_ID;
 import static main.java.com.leon.baobui.constants.PathConstants.TWEET_ADDITIONAL_INFO_USER_ID;
 import static main.java.com.leon.baobui.constants.PathConstants.TWEET_AUTHOR_USER_ID;
 import static main.java.com.leon.baobui.constants.PathConstants.TWEET_COUNT;
@@ -104,5 +108,20 @@ public class UserApiController {
     @GetMapping(USER_ID)
     public UserResponse getUserById(@PathVariable("userId") Long userId) {
         return userService.getUserResponseById(userId);
+    }
+
+    @PutMapping(LIKE_COUNT)
+    public void updateLikeCount(@PathVariable("increaseCount") boolean increaseCount) {
+        userService.updateLikeCount(increaseCount);
+    }
+
+    @GetMapping(NOTIFICATION_USER_ID)
+    public void increaseNotificationsCount(@PathVariable("userId") Long userId) {
+        userService.increaseNotificationsCount(userId);
+    }
+
+    @GetMapping(NOTIFICATION_USER_USER_ID)
+    public NotificationUserResponse getNotificationUser(@PathVariable("userId") Long userId) {
+        return userService.getNotificationUser(userId);
     }
 }
