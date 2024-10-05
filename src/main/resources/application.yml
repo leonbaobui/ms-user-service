@@ -47,7 +47,7 @@ rabbitmq:
     routing-keys: internal.mail.routing-key
 
 jwt:
-  secret: ${JWT_KEY}
+  secret: ${JWT_SECRET}
 
 eureka:
   client:
