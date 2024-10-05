@@ -30,7 +30,7 @@ spring:
     redis:
       host: localhost
       user:
-      password: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      password:
       port: '6379'
       database: '0'
       timeout: '60000'
@@ -41,7 +41,7 @@ rabbitmq:
     routing-keys: internal.mail.routing-key
 
 jwt:
-  secret: 208bc47b3e1ee5554e388c735b9f234f89ac246e8ce463c8313fc1cff16e760e
+  secret: ${JWT_KEY}
 
 service:
   downstream-url:
