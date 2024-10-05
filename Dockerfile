@@ -12,7 +12,7 @@ COPY build.gradle /app/
 
 # Copy source and resource files from ms-user-service
 COPY /src /app/src
-
+COPY .env /app/
 
 # Build the application
 RUN gradle clean build --no-daemon
