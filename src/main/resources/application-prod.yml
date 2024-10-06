@@ -32,19 +32,14 @@ spring:
 #      ddl-auto: create-drop
   datasource:
     platform: postgres
-    url: jdbc:postgresql://twitter-db-tranbaotin270402-c9d4.i.aivencloud.com:27368/defaultdb?sslmode=require
+    url: jdbc:postgresql://ep-cold-mud-a1zdq33b-pooler.ap-southeast-1.aws.neon.tech/ms_user_service?sslmode=require
     username: ${POSTGRESQL_USERNAME}
     password: ${POSTGRESQL_PASSWORD}
     driverClassName: org.postgresql.Driver
   rabbitmq:
-    addresses: amqps://gqupsbui:sNGBVBZF4XIuUNvAnYWfOWJ8mUiUTUAr@armadillo.rmq.cloudamqp.com/gqupsbui
-#    host: armadillo.rmq.cloudamqp.com
-#    port: 5672
-#    username: gqupsbui
-#    password: sNGBVBZF4XIuUNvAnYWfOWJ8mUiUTUAr
+    addresses: amqps://${RABBITMQ_USERNAME}:${RABBITMQ_PASSWORD}@armadillo.rmq.cloudamqp.com/${RABBITMQ_USERNAME}
   data:
     redis:
-#      url: rediss://red-coh99qev3ddc73fkf190:ZFBBFUT5GfKDJHH0T5Zo8A1VVny8skwL@singapore-redis.render.com:6379
       host: singapore-redis.render.com
       username: ${REDIS_USERNAME}
       password: ${REDIS_PASSWORD}
@@ -60,7 +55,7 @@ rabbitmq:
     routing-keys: internal.mail.routing-key
 
 jwt:
-  secret: 208bc47b3e1ee5554e388c735b9f234f89ac246e8ce463c8313fc1cff16e760e
+  secret: ${JWT_SECRET}
 
 service:
   downstream-url:
