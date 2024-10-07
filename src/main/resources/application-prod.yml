@@ -60,7 +60,7 @@ jwt:
 service:
   downstream-url:
     ms-image-service: https://ms-image-service-kfnp.onrender.com
-    ms-notification-service: https://ms-notification-service.onrender.com
+    ms-notification-service: https://ms-notification-service-c0nv.onrender.com
 
 eureka:
   instance:
