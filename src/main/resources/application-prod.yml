@@ -60,11 +60,11 @@ jwt:
 service:
   downstream-url:
     ms-image-service: https://ms-image-service-kfnp.onrender.com
-    ms-notification-service: https://ms-notification-service.onrender.com
+    ms-notification-service: https://ms-notification-service-c0nv.onrender.com
 
 eureka:
   instance:
-    hostname: ms-user-service-ndm5.onrender.com  # Public domain name
+    hostname: ms-user-service-irol.onrender.com  # Public domain name
     nonSecurePort: 443  # Standard HTTP port
     securePortEnabled: true  # Enable if you're using HTTPS
     preferIpAddress: false  # Use the hostname instead of the IP address
