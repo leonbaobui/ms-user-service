@@ -128,6 +128,6 @@ flyway {
     user = 'postgres'
     password = 'postgres'
     schemas = ['public']
-    locations = ['classpath:common-database-ods/migrate/sql'] // The location of your migration scripts
+    locations = ['classpath:db/migration/migrate/ms-user-service'] // The location of your migration scripts
     cleanDisabled = false
 }
