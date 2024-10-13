@@ -1,0 +1,93 @@
+management:
+  trace:
+    enabled: true
+    include: AUTHORIZATION_HEADER, COOKIE_HEADERS, PRINCIPAL, REMOTE_ADDRESS, REQUEST_HEADERS, RESPONSE_HEADERS, SESSION_ID, TIME_TAKEN
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  level:
+    org.springframework.web.filter.CommonsRequestLogging: DEBUG
+    org.springframework.web.HttpLogging: TRACE
+    reactor.netty.http.server: TRACE
+    reactor.netty.http.client: TRACE
+server:
+  port : 8443
+  forward-headers-strategy: framework
+  servlet:
+    context-path: /ms-user-service
+#hostname: ms-user-service:8081
+spring:
+  config:
+    import: optional:file:.env.sit
+  application:
+    name: ms-user-service
+  flyway:
+    enabled: false
+    baseline-on-migrate: false
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+#      This config will override the flyway because it will drop the user schema flyway
+#      ddl-auto: create-drop
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://dpg-cs5pmdd6l47c73f6t4cg-a.singapore-postgres.render.com/ms_user_service_sit
+    username: ${POSTGRESQL_USERNAME}
+    password: ${POSTGRESQL_PASSWORD}
+    driverClassName: org.postgresql.Driver
+  rabbitmq:
+    addresses: amqps://${RABBITMQ_USERNAME}:${RABBITMQ_PASSWORD}@armadillo.rmq.cloudamqp.com/${RABBITMQ_USERNAME}
+  data:
+    redis:
+      host: singapore-redis.render.com
+      username: ${REDIS_USERNAME}
+      password: ${REDIS_PASSWORD}
+      port: '6379'
+      database: '0'
+      timeout: '60000'
+      ssl:
+        enabled: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            redirect-uri: "{baseUrl}/ui/v1/auth/login/oauth2/code/google/{registrationId}"
+            client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
+            client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+
+rabbitmq:
+  internal-mail:
+    exchanges: internal.exchange
+    routing-keys: internal.mail.routing-key
+
+jwt:
+  secret: ${JWT_SECRET}
+
+service:
+  downstream-url:
+    ms-image-service: https://ms-image-service-kfnp.onrender.com
+    ms-notification-service: https://ms-notification-service-c0nv.onrender.com
+
+eureka:
+  instance:
+    hostname: ms-user-service-irol.onrender.com  # Public domain name
+    nonSecurePort: 443  # Standard HTTP port
+    securePortEnabled: true  # Enable if you're using HTTPS
+    preferIpAddress: false  # Use the hostname instead of the IP address
+    statusPageUrlPath: /actuator/info  # Default status page path
+    healthCheckUrlPath: /actuator/health  # Default health check path
+  client:
+    serviceUrl:
+      defaultZone: https://ms-eureka-server-2cvn.onrender.com/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  # instance:
+  #   hostname: ${EUREKA_HOST:localhost}
