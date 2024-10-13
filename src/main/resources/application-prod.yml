@@ -22,8 +22,7 @@ spring:
   application:
     name: ms-user-service
   flyway:
-    enabled: true
-    baseline-on-migrate : true
+    enabled: false
   jpa:
     database: POSTGRESQL
     show-sql: true
@@ -48,6 +47,18 @@ spring:
       timeout: '60000'
       ssl:
         enabled: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            redirect-uri: "{baseUrl}/ui/v1/auth/login/oauth2/code/google/{registrationId}"
+            client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
+            client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
 
 rabbitmq:
   internal-mail:
