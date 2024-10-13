@@ -3,7 +3,6 @@ package com.twitter.ms.security.oauth2;
 import java.util.Collection;
 import java.util.Map;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.GrantedAuthority;
