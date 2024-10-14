@@ -6,8 +6,15 @@ management:
     web:
       exposure:
         include: '*'
+
 logging:
   level:
+    org:
+      springframework:
+        security: DEBUG
+        security.oauth2: DEBUG
+        security.web.authentication: DEBUG
+        web: DEBUG
     org.springframework.web.filter.CommonsRequestLogging: DEBUG
     org.springframework.web.HttpLogging: TRACE
     reactor.netty.http.server: TRACE
