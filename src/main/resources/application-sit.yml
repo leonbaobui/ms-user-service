@@ -53,6 +53,9 @@ spring:
 
   security:
     oauth2:
+      default:
+        login-page-url: http://localhost:3000/account/signin
+        default-success-url: http://localhost:3000/home
       client:
         registration:
           google:

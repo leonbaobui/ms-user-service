@@ -50,6 +50,9 @@ spring:
 
   security:
     oauth2:
+      default:
+        login-page-url: https://frontend-twitter.onrender.com/account/signin
+        default-success-url: https://frontend-twitter.onrender.com/home
       client:
         registration:
           google:
