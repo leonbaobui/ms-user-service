@@ -17,10 +17,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
     private final GoogleOAuth2UserService googleOAuth2UserService;
 
-    @Value("spring.security.oauth2.default.login-page-url")
+    @Value("${spring.security.oauth2.default.login-page-url}")
     private String loginPageUrl;
 
-    @Value("spring.security.oauth2.default.default-success-url")
+    @Value("${spring.security.oauth2.default.default-success-url}")
     private String defaultSuccessUrl;
 
 
@@ -35,7 +35,7 @@ public class WebSecurityConfig {
         ).oauth2Login(oauth2Login ->
             oauth2Login
                 .loginPage(loginPageUrl)
-                .defaultSuccessUrl(defaultSuccessUrl)
+                .defaultSuccessUrl(defaultSuccessUrl, true)
                 .userInfoEndpoint(customizer -> customizer.userService(googleOAuth2UserService))
         );
         return httpSecurityFilterChain.build();
