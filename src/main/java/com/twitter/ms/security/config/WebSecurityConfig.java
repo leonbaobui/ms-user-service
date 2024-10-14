@@ -30,11 +30,12 @@ public class WebSecurityConfig {
         // so basically here allow all authorize requests for other security filter (future)
         httpSecurityFilterChain.authorizeHttpRequests(authorizeRequests ->
                 authorizeRequests
-                        .anyRequest().authenticated()
+                    .requestMatchers("/ms-user-service/ui/v1/auth/**", "/ms-user-service/actuator/**").permitAll() // Disable OAuth2 login for these paths
+                    .anyRequest().authenticated()
         ).oauth2Login(oauth2Login ->
             oauth2Login
-                    .loginPage(loginPageUrl)
-                    .defaultSuccessUrl(defaultSuccessUrl)
+                .loginPage(loginPageUrl)
+                .defaultSuccessUrl(defaultSuccessUrl)
                 .userInfoEndpoint(customizer -> customizer.userService(googleOAuth2UserService))
         );
         return httpSecurityFilterChain.build();
