@@ -3,6 +3,8 @@ package com.twitter.ms.mapper;
 import com.twitter.ms.dto.request.RegistrationRequest;
 import com.twitter.ms.dto.response.AuthUserResponse;
 import com.twitter.ms.model.User;
+import com.twitter.ms.security.oauth2.GoogleOAuth2User;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -15,6 +17,12 @@ public interface UserMapper {
 
     @Mapping(target = "fullName", source = "request.username")
     User registrationRequestToUserDAO(RegistrationRequest request);
+
+    @Mapping(target = "username", source = "googleOAuth2User.name")
+    @Mapping(target = "avatar", source = "googleOAuth2User.picture")
+    @Mapping(target = "email", source = "googleOAuth2User.email")
+    @Mapping(target = "active", expression = "java(true)")
+    User oauth2RegistrationRequestToUserDAO(GoogleOAuth2User googleOAuth2User);
 
     AuthUserResponse userEntityToAuthUserDTO(User user);
 }

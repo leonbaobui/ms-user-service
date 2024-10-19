@@ -11,11 +11,11 @@ logging:
   level:
     org:
       springframework:
-        security: DEBUG
-        security.oauth2: DEBUG
-        security.web.authentication: DEBUG
-        web: DEBUG
-    org.springframework.web.filter.CommonsRequestLogging: DEBUG
+        security: TRACE
+        security.oauth2: TRACE
+        security.web.authentication: TRACE
+        web: TRACE
+    org.springframework.web.filter.CommonsRequestLogging: TRACE
     org.springframework.web.HttpLogging: TRACE
     reactor.netty.http.server: TRACE
     reactor.netty.http.client: TRACE
@@ -66,7 +66,8 @@ spring:
       client:
         registration:
           google:
-            redirect-uri: "{baseUrl}/ui/v1/auth/login/oauth2/code/google/{registrationId}"
+#            redirect-uri: "{baseUrl}/ui/v1/auth/login/oauth2/code/google/{registrationId}"
+            redirect-uri: "{baseUrl}/login/oauth2/code/google/{registrationId}"
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
             scope:
