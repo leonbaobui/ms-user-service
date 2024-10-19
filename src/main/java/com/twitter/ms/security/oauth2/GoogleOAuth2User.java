@@ -36,7 +36,7 @@ public class GoogleOAuth2User implements OAuth2User {
         return oauth2User.getAttribute("email");
     }
 
-    public String getPicture() {
+    public String getAvatarUrl() {
         return oauth2User.getAttribute("picture");
     }
 

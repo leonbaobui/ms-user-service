@@ -60,14 +60,15 @@ spring:
 
   security:
     oauth2:
-      default:
-        login-page-url: http://localhost:3000/account/signin
-        default-success-url: http://localhost:3000/home
       client:
+        authorized:
+          redirect-uri:
+              - http://localhost:3000/oauth2/redirect
         registration:
           google:
 #            redirect-uri: "{baseUrl}/ui/v1/auth/login/oauth2/code/google/{registrationId}"
-            redirect-uri: "{baseUrl}/login/oauth2/code/google/{registrationId}"
+#            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
             scope:

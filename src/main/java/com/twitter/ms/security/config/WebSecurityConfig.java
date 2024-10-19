@@ -3,6 +3,7 @@ package com.twitter.ms.security.config;
 import lombok.RequiredArgsConstructor;
 
 import com.twitter.ms.security.oauth2.GoogleOAuth2UserService;
+import com.twitter.ms.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.twitter.ms.security.oauth2.OAuth2LoginSuccessHandler;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -18,13 +20,16 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
     private final GoogleOAuth2UserService googleOAuth2UserService;
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
-
-    @Value("${spring.security.oauth2.default.login-page-url}")
-    private String loginPageUrl;
-
-    @Value("${spring.security.oauth2.default.default-success-url}")
-    private String defaultSuccessUrl;
-
+    private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
+    /*
+      By default, Spring OAuth2 uses HttpSessionOAuth2AuthorizationRequestRepository to save
+      the authorization request. But, since our service is stateless, we can't save it in
+      the session. We'll save the request in a Base64 encoded cookie instead.
+    */
+    @Bean
+    public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
+        return new HttpCookieOAuth2AuthorizationRequestRepository();
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurityFilterChain) throws Exception {
@@ -33,11 +38,26 @@ public class WebSecurityConfig {
         httpSecurityFilterChain.authorizeHttpRequests(authorizeRequests ->
                 authorizeRequests
                 .anyRequest().permitAll())
+                .sessionManagement(httpSecuritySessionManagementConfigurer ->
+                        httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(httpSecurityCsrfConfigurer ->
+                        httpSecurityCsrfConfigurer.disable()
+                )
+                .formLogin(httpSecurityFormLoginConfigurer ->
+                        httpSecurityFormLoginConfigurer.disable()
+                )
                 .oauth2Login(oauth2Login ->
                     oauth2Login
-                    .userInfoEndpoint(customizer -> customizer.userService(googleOAuth2UserService))
-                    .successHandler(oAuth2LoginSuccessHandler)
-                    .defaultSuccessUrl("/", true)
+                            .authorizationEndpoint(authorizationEndpointConfig -> {
+                                authorizationEndpointConfig
+                                        .baseUri("/oauth2/authorize")
+                                        .authorizationRequestRepository(cookieAuthorizationRequestRepository());
+                            })
+                            .redirectionEndpoint(redirectionEndpointConfig -> {
+                                redirectionEndpointConfig.baseUri("/oauth2/callback/*");
+                            })
+                            .userInfoEndpoint(customizer -> customizer.userService(googleOAuth2UserService))
+                            .successHandler(oAuth2LoginSuccessHandler)
                 );
         return httpSecurityFilterChain.build();
     }

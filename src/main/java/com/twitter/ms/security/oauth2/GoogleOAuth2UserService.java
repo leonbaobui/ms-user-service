@@ -6,11 +6,14 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 
 import com.twitter.ms.dto.response.RegistrationResponse;
+import com.twitter.ms.enums.AuthenticationProvider;
 import com.twitter.ms.exception.RegistrationException;
 import com.twitter.ms.mapper.UserMapper;
 import com.twitter.ms.model.User;
 import com.twitter.ms.repository.UserRepository;
+import com.twitter.ms.utils.UserPrincipal;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,31 +33,33 @@ public class GoogleOAuth2UserService extends DefaultOAuth2UserService {
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        OAuth2User user = super.loadUser(userRequest);
-        return new GoogleOAuth2User(user);
+        OAuth2User oAuth2User = super.loadUser(userRequest);
+        return processGoogleOAuth2User(userRequest, oAuth2User);
     }
 
-    public void oauth2Register(OAuth2AuthenticationToken token, String idAttributeKey) {
-        GoogleOAuth2User googleOAuth2User = (GoogleOAuth2User) token.getPrincipal();
+    private OAuth2User processGoogleOAuth2User(OAuth2UserRequest userRequest, OAuth2User oAuth2User) {
+        GoogleOAuth2User googleOAuth2User = new GoogleOAuth2User(oAuth2User);
         String email = googleOAuth2User.getEmail();
         Optional<User> existingUser = userRepository.findByEmail(email);
-        if (existingUser.isEmpty()) {
-            User user = UserMapper.INSTANCE.oauth2RegistrationRequestToUserDAO(googleOAuth2User);
-            userRepository.saveAndFlush(user);
+        User user = existingUser.map(existedUser -> updateExistingUser(existedUser, googleOAuth2User, userRequest))
+                .orElseGet(() -> registerNewUser(googleOAuth2User));
+        return googleOAuth2User;
+//        return UserPrincipal.create(user, googleOAuth2User.getAttributes());
+    }
 
-            DefaultOAuth2User oAuth2User = new DefaultOAuth2User(
-                    List.of(new SimpleGrantedAuthority(user.getRole())),
-                    googleOAuth2User.getAttributes(),
-                    idAttributeKey
-                    );
-            Authentication securityOAuth = new OAuth2AuthenticationToken(
-                    oAuth2User,
-                    List.of(new SimpleGrantedAuthority(user.getRole())),
-                    token.getAuthorizedClientRegistrationId()
-            );
-            SecurityContextHolder.getContext().setAuthentication(securityOAuth);
-        } else {
-            throw new RegistrationException("Email", "Email is already registered", HttpStatus.FORBIDDEN);
+    private User registerNewUser(GoogleOAuth2User googleOAuth2User) {
+        User user = UserMapper.INSTANCE.oauth2RegistrationRequestToUserDAO(googleOAuth2User);
+        return userRepository.saveAndFlush(user);
+    }
+
+    private User updateExistingUser(User existingUser, GoogleOAuth2User googleOAuth2User, OAuth2UserRequest oAuth2UserRequest) {
+        if(!StringUtils.equalsIgnoreCase(oAuth2UserRequest.getClientRegistration().getRegistrationId(), String.valueOf(existingUser.getAuthenticationProvider()))) {
+            throw new RegistrationException("auth_provider", "Looks like you're signed up with " +
+                    existingUser.getAuthenticationProvider() + " account. Please use your " + existingUser.getAuthenticationProvider() +
+                    " account to login.", HttpStatus.BAD_REQUEST);
         }
+        existingUser.setFullName(googleOAuth2User.getName());
+        existingUser.setAvatar(googleOAuth2User.getAvatarUrl());
+        return userRepository.saveAndFlush(existingUser);
     }
 }

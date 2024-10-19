@@ -19,8 +19,9 @@ public interface UserMapper {
     User registrationRequestToUserDAO(RegistrationRequest request);
 
     @Mapping(target = "username", source = "googleOAuth2User.name")
-    @Mapping(target = "avatar", source = "googleOAuth2User.picture")
+    @Mapping(target = "avatar", source = "googleOAuth2User.avatarUrl")
     @Mapping(target = "email", source = "googleOAuth2User.email")
+    @Mapping(target = "fullName", source = "googleOAuth2User.name")
     @Mapping(target = "active", expression = "java(true)")
     User oauth2RegistrationRequestToUserDAO(GoogleOAuth2User googleOAuth2User);
 
