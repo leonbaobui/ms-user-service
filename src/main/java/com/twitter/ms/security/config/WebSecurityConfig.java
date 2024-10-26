@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -35,9 +36,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurityFilterChain) throws Exception {
         // we have already the security filter chain handled by gateway
         // so basically here allow all authorize requests for other security filter (future)
-        httpSecurityFilterChain.authorizeHttpRequests(authorizeRequests ->
-                authorizeRequests
-                .anyRequest().permitAll())
+        httpSecurityFilterChain
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
                         httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(httpSecurityCsrfConfigurer ->
@@ -50,11 +49,11 @@ public class WebSecurityConfig {
                     oauth2Login
                             .authorizationEndpoint(authorizationEndpointConfig -> {
                                 authorizationEndpointConfig
-                                        .baseUri("/oauth2/authorize")
+                                        .baseUri("/ui/v1/auth/oauth2/authorize")
                                         .authorizationRequestRepository(cookieAuthorizationRequestRepository());
                             })
                             .redirectionEndpoint(redirectionEndpointConfig -> {
-                                redirectionEndpointConfig.baseUri("/oauth2/callback/*");
+                                redirectionEndpointConfig.baseUri("/ui/v1/auth/oauth2/callback/*");
                             })
                             .userInfoEndpoint(customizer -> customizer.userService(googleOAuth2UserService))
                             .successHandler(oAuth2LoginSuccessHandler)
