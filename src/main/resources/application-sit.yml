@@ -63,12 +63,12 @@ spring:
       client:
         authorized:
           redirect-uri:
-              - http://localhost:3000/oauth2/redirect
+            - https://frontend-twitter.onrender.com/oauth2/redirect
         registration:
           google:
 #            redirect-uri: "{baseUrl}/ui/v1/auth/login/oauth2/code/google/{registrationId}"
 #            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            redirectUri: "http://localhost:8090/ui/v1/auth/oauth2/callback/{registrationId}"
+            redirectUri: "{baseUrl}/ui/v1/auth/oauth2/callback/{registrationId}"
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
             scope:
