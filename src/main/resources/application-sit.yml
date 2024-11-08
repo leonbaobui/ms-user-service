@@ -68,7 +68,7 @@ spring:
           google:
 #            redirect-uri: "{baseUrl}/ui/v1/auth/login/oauth2/code/google/{registrationId}"
 #            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            redirectUri: "{baseUrl}/ui/v1/auth/oauth2/callback/{registrationId}"
+            redirectUri: "https://ms-api-gateway-inku.onrender.com/ui/v1/auth/oauth2/callback/{registrationId}"
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
             scope:

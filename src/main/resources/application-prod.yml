@@ -56,7 +56,7 @@ spring:
       client:
         registration:
           google:
-            redirectUri: "{baseUrl}/ui/v1/auth/oauth2/callback/{registrationId}"
+            redirectUri: "https://ms-api-gateway-inku.onrender.com/ui/v1/auth/oauth2/callback/{registrationId}"
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
             scope:
