@@ -66,8 +66,6 @@ spring:
             - https://frontend-twitter.onrender.com/oauth2/redirect
         registration:
           google:
-#            redirect-uri: "{baseUrl}/ui/v1/auth/login/oauth2/code/google/{registrationId}"
-#            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             redirectUri: "https://ms-api-gateway-inku.onrender.com/ui/v1/auth/oauth2/callback/{registrationId}"
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
@@ -90,9 +88,9 @@ service:
 
 eureka:
   instance:
-    hostname: localhost  # Public domain name
-    nonSecurePort: 80  # Standard HTTP port
-    securePortEnabled: false  # Enable if you're using HTTPS
+    hostname: ms-user-service-irol.onrender.com  # Public domain name
+    nonSecurePort: 443  # Standard HTTP port
+    securePortEnabled: true  # Enable if you're using HTTPS
     preferIpAddress: false  # Use the hostname instead of the IP address
     statusPageUrlPath: /actuator/info  # Default status page path
     healthCheckUrlPath: /actuator/health  # Default health check path
