@@ -52,7 +52,7 @@ spring:
     oauth2:
       authorized:
         redirect-uri:
-            - http://localhost:3000/oauth2/redirect
+            - https://frontend-twitter.onrender.com/oauth2/redirect
       client:
         registration:
           google:
