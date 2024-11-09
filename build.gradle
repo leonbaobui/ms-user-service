@@ -66,7 +66,7 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.7.1'
     implementation 'org.springframework.kafka:spring-kafka:3.1.1'
 
-    implementation 'org.springframework.security:spring-security-crypto:6.2.1'
+    implementation 'org.springframework.security:spring-security-crypto'
 
     implementation 'org.springframework.boot:spring-boot-starter-actuator:3.2.1'
 
