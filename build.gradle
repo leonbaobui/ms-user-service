@@ -134,6 +134,7 @@ flyway {
     url = 'jdbc:postgresql://ep-cold-mud-a1zdq33b-pooler.ap-southeast-1.aws.neon.tech/ms_user_service?sslmode=require'
     user = System.getenv('POSTGRESQL_USERNAME')
     password = System.getenv('POSTGRESQL_PASSWORD')
+
     schemas = ['public']
     locations = ['classpath:db/migration/migrate/ms-user-service'] // The location of your migration scripts
     cleanDisabled = false
