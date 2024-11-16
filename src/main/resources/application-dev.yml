@@ -44,9 +44,7 @@ jwt:
   secret: ${JWT_SECRET}
 
 service:
-  downstream-url:
-    ms-image-service: https://ms-image-service-kfnp.onrender.com
-    ms-notification-service: https://ms-notification-service-c0nv.onrender.com
+  gateway-url: https://ms-api-gateway-cjh1.onrender.com
 
 eureka:
   client:
