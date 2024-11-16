@@ -56,7 +56,7 @@ spring:
             - https://frontend-twitter.onrender.com/oauth2/redirect
         registration:
           google:
-            redirectUri: "https://ms-api-gateway-cjh1.onrender.com/ui/v1/auth/oauth2/callback/{registrationId}"
+            redirectUri: "${MS_GATEWAY_URL}/ui/v1/auth/oauth2/callback/{registrationId}"
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
             scope:
