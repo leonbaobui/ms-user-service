@@ -58,13 +58,11 @@ jwt:
   secret: ${JWT_SECRET}
 
 service:
-  downstream-url:
-    ms-image-service: https://ms-image-service-kfnp.onrender.com
-    ms-notification-service: https://ms-notification-service-c0nv.onrender.com
+  gateway-url: https://ms-api-gateway-cjh1.onrender.com
 
 eureka:
   instance:
-    hostname: ms-user-service-irol.onrender.com  # Public domain name
+    hostname: ms-user-service-kfhc.onrender.com  # Public domain name
     nonSecurePort: 443  # Standard HTTP port
     securePortEnabled: true  # Enable if you're using HTTPS
     preferIpAddress: false  # Use the hostname instead of the IP address
@@ -72,7 +70,7 @@ eureka:
     healthCheckUrlPath: /actuator/health  # Default health check path
   client:
     serviceUrl:
-      defaultZone: https://ms-eureka-server-2cvn.onrender.com/eureka
+      defaultZone: https://ms-eureka-server-cdam.onrender.com/eureka
     fetch-registry: true
     register-with-eureka: true
   # instance:
