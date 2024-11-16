@@ -129,10 +129,11 @@ def dbUrl = System.getenv('POSTGRESQL_URL')
 def dbUser = System.getenv('POSTGRESQL_USERNAME')
 def dbPassword = System.getenv('POSTGRESQL_PASSWORD')
 
+
 flyway {
-    url = 'jdbc:postgresql://dpg-cs5pmdd6l47c73f6t4cg-a.singapore-postgres.render.com/ms_user_service_sit'
-    user = 'ms_user_service_sit_user'
-    password = 'qD1GcD67NWGjTAy127ZMOKQgSCyPpqod'
+    url = 'jdbc:postgresql://ep-cold-mud-a1zdq33b-pooler.ap-southeast-1.aws.neon.tech/ms_user_service?sslmode=require'
+    user = System.getenv('POSTGRESQL_USERNAME')
+    password = System.getenv('POSTGRESQL_PASSWORD')
     schemas = ['public']
     locations = ['classpath:db/migration/migrate/ms-user-service'] // The location of your migration scripts
     cleanDisabled = false
