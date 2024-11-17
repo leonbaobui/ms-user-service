@@ -49,6 +49,7 @@ public class GoogleOAuth2UserService extends DefaultOAuth2UserService {
 
     private User registerNewUser(GoogleOAuth2User googleOAuth2User) {
         User user = UserMapper.INSTANCE.oauth2RegistrationRequestToUserDAO(googleOAuth2User);
+        user.setAuthenticationProvider(AuthenticationProvider.GOOGLE);
         return userRepository.saveAndFlush(user);
     }
 
