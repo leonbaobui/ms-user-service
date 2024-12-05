@@ -13,7 +13,7 @@ import static main.java.com.leon.baobui.constants.FeignConstants.IMAGE_SERVICE;
 import static main.java.com.leon.baobui.constants.PathConstants.API_V1_IMAGE;
 
 @FeignClient(value = IMAGE_SERVICE, url = "${service.gateway-url}",
-        path = API_V1_IMAGE, configuration = FeignConfiguration.class)
+        path = "/"  + API_V1_IMAGE, configuration = FeignConfiguration.class)
 public interface ImageClient {
 
     @CircuitBreaker(name = IMAGE_SERVICE)
