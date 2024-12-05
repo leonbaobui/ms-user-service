@@ -3,6 +3,8 @@ management:
     web:
       exposure:
         include: "*"
+frontend:
+  url: http://localhost:3000
 server:
   port : 8081
   servlet:

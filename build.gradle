@@ -66,7 +66,7 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.7.1'
     implementation 'org.springframework.kafka:spring-kafka:3.1.1'
 
-    implementation 'org.springframework.security:spring-security-crypto:6.2.1'
+    implementation 'org.springframework.security:spring-security-crypto'
 
     implementation 'org.springframework.boot:spring-boot-starter-actuator:3.2.1'
 
@@ -75,6 +75,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-core'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.2.1'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:3.2.4'
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.2.4'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -123,11 +125,18 @@ dockerCompose {
     useComposeFiles = ["${rootProject.projectDir}/src/main/resources/docker/docker-compose.yml"]
 }
 
+def dbUrl = System.getenv('POSTGRESQL_URL')
+def dbUser = System.getenv('POSTGRESQL_USERNAME')
+def dbPassword = System.getenv('POSTGRESQL_PASSWORD')
+
+
 flyway {
-    url = 'jdbc:postgresql://localhost:5432/postgres'
-    user = 'postgres'
-    password = 'postgres'
+    url = 'jdbc:postgresql://ep-cold-mud-a1zdq33b-pooler.ap-southeast-1.aws.neon.tech/ms_user_service?sslmode=require'
+    user = System.getenv('POSTGRESQL_USERNAME')
+    password = System.getenv('POSTGRESQL_PASSWORD')
+
     schemas = ['public']
     locations = ['classpath:db/migration/migrate/ms-user-service'] // The location of your migration scripts
     cleanDisabled = false
 }
+

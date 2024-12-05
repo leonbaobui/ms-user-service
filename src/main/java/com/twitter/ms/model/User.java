@@ -7,8 +7,11 @@ import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import com.twitter.ms.enums.AuthenticationProvider;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -113,6 +116,10 @@ public class User {
 
     @Column(name = "role", columnDefinition = "varchar(255) default 'USER'")
     private String role = "USER";
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "auth_provider")
+    private AuthenticationProvider authenticationProvider;
 
     @Column(name = "tweet_count", columnDefinition = "int8 default 0")
     private Long tweetCount = 0L;

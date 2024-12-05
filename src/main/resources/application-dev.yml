@@ -44,7 +44,7 @@ jwt:
   secret: ${JWT_SECRET}
 
 service:
-  gateway-url: https://ms-api-gateway-cjh1.onrender.com
+  gateway-url: ${MS_GATEWAY_URL}
 
 eureka:
   client:

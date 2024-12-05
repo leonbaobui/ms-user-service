@@ -6,9 +6,16 @@ management:
     web:
       exposure:
         include: '*'
+
 logging:
   level:
-    org.springframework.web.filter.CommonsRequestLogging: DEBUG
+    org:
+      springframework:
+        security: TRACE
+        security.oauth2: TRACE
+        security.web.authentication: TRACE
+        web: TRACE
+    org.springframework.web.filter.CommonsRequestLogging: TRACE
     org.springframework.web.HttpLogging: TRACE
     reactor.netty.http.server: TRACE
     reactor.netty.http.client: TRACE
@@ -19,10 +26,13 @@ server:
     context-path: /ms-user-service
 #hostname: ms-user-service:8081
 spring:
+  config:
+    import: optional:file:.env.sit
   application:
     name: ms-user-service
   flyway:
     enabled: false
+    baseline-on-migrate: false
   jpa:
     database: POSTGRESQL
     show-sql: true
@@ -31,7 +41,7 @@ spring:
 #      ddl-auto: create-drop
   datasource:
     platform: postgres
-    url: jdbc:postgresql://ep-cold-mud-a1zdq33b-pooler.ap-southeast-1.aws.neon.tech/ms_user_service?sslmode=require
+    url: jdbc:postgresql://dpg-cs5pmdd6l47c73f6t4cg-a.singapore-postgres.render.com/ms_user_service_sit
     username: ${POSTGRESQL_USERNAME}
     password: ${POSTGRESQL_PASSWORD}
     driverClassName: org.postgresql.Driver
@@ -76,7 +86,7 @@ service:
 
 eureka:
   instance:
-    hostname: ${MS_USER_HOST} # Public domain name
+    hostname: ms-user-service-kfhc.onrender.com  # Public domain name
     securePort: 443  # Standard HTTP port
     securePortEnabled: true  # Enable if you're using HTTPS
     nonSecurePortEnabled: false
@@ -85,7 +95,7 @@ eureka:
     healthCheckUrlPath: /actuator/health  # Default health check path
   client:
     serviceUrl:
-      defaultZone: "${MS_EUREKA_URL}/eureka"
+      defaultZone: https://ms-eureka-server-cdam.onrender.com/eureka
     fetch-registry: true
     register-with-eureka: true
   # instance:
