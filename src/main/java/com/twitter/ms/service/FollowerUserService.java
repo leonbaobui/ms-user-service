@@ -1,6 +1,10 @@
 package com.twitter.ms.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import com.twitter.ms.exception.DataNotFoundException;
 import com.twitter.ms.model.User;
 import com.twitter.ms.producer.FollowerUserProducer;
@@ -22,6 +26,7 @@ import main.java.com.leon.baobui.util.AuthUtil;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class FollowerUserService {
     //    private final NotificationClient notificationClient;
     private final FollowerUserRepository followerUserRepository;
@@ -71,6 +76,13 @@ public class FollowerUserService {
     }
 
     public HeaderResponse<UserResponse> getFollowers(Long userId, Pageable pageable) {
+        List<User> users = userRepository.findAll();
+        users.forEach(user -> {
+            List<User> followers = user.getFollowers();
+            followers.forEach(follower -> {
+                log.info("N+1 problem {}", follower.getEmail());
+            });
+        });
         Page<UserProjection> userProjections = followerUserRepository.getFollowersById(userId, pageable);
         return basicMapper.getHeaderResponse(userProjections, UserResponse.class);
     }
