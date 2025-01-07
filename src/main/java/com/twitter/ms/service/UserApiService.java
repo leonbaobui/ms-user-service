@@ -72,6 +72,7 @@ public class UserApiService {
         userRepository.updateTweetCount(increase, authUserId);
     }
 
+    @Transactional(readOnly = true)
     public List<Long> getValidUserIds(IdsRequest request) {
         Long authUserId = AuthUtil.getAuthenticatedUserId();
         List<Long> blockedUserIds = userRepository.getUserIdsWhoBlockedMyProfile(request.getIds(), authUserId);

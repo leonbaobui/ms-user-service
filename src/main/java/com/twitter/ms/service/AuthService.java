@@ -24,6 +24,7 @@ public class AuthService {
     private final JwtProvider jwtProvider;
     private final BasicMapper basicMapper;
 
+    //TODO: Need optimization. Using dto projection instead of entities + mapper
     public AuthResponse login(AuthRequest authRequest) {
         User user = userRepository.findByEmail(authRequest.getEmail())
                 .orElseThrow(() ->
