@@ -5,11 +5,14 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import com.twitter.ms.dto.request.UserRequest;
 import com.twitter.ms.dto.response.AuthUserResponse;
+import com.twitter.ms.dto.response.UserDetailResponse;
 import com.twitter.ms.dto.response.UserProfileResponse;
+import com.twitter.ms.exception.DataNotFoundException;
 import com.twitter.ms.feign.ImageClient;
 import com.twitter.ms.model.User;
 import com.twitter.ms.repository.UserRepository;
 import com.twitter.ms.repository.projection.AuthUserProjection;
+import com.twitter.ms.repository.projection.UserDetailProjection;
 import com.twitter.ms.repository.projection.UserPrincipalView;
 import com.twitter.ms.repository.projection.UserProfileView;
 import com.twitter.ms.repository.projection.UserProjection;
@@ -90,5 +93,11 @@ public class UserService {
         Page<UserProjection> userProjectionPage =
                 userRepository.getUserByUsername(username, pageable, UserProjection.class);
         return basicMapper.convertToResponseList(userProjectionPage.getContent(), UserResponse.class);
+    }
+
+    public UserDetailResponse getUserDetails(Long userId) {
+        UserDetailProjection userDetailProjection = userRepository.getUserById(userId, UserDetailProjection.class)
+                .orElseThrow(() -> new DataNotFoundException("userId", USER_NOT_FOUND, HttpStatus.NOT_FOUND));
+        return basicMapper.convertToResponse(userDetailProjection, UserDetailResponse.class);
     }
 }
