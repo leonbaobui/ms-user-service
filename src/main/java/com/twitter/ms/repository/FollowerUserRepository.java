@@ -1,6 +1,9 @@
 package com.twitter.ms.repository;
 
+import java.util.List;
+
 import com.twitter.ms.model.User;
+import com.twitter.ms.repository.projection.SameFollower;
 import com.twitter.ms.repository.projection.UserProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,4 +47,23 @@ public interface FollowerUserRepository extends JpaRepository<User, Long> {
             ") LIMIT 1", nativeQuery = true)
     void addFollowerRequest(@Param("authUserId") Long authUserId, @Param("userId") Long userId);
 
+    @Query(value = "SELECT users.id as id, users.full_name as fullName, users.username as username, users.about as about,\n" +
+                   "        users.private_profile as privateProfile, users.avatar as avatar\n" +
+                   "FROM users\n" +
+                   "WHERE users.id IN (\n" +
+                   "    SELECT user_subscriptions.subscriber_id\n" +
+                   "    FROM user_subscriptions\n" +
+                   "    WHERE user_subscriptions.user_id = :userId\n" +
+                   ")\n" +
+                   "INTERSECT\n" +
+                   "SELECT users.id as id, users.full_name as fullName, users.username as username, users.about as about,\n" +
+                   "        users.private_profile as privateProfile, users.avatar as avatar\n" +
+                   "FROM users\n" +
+                   "WHERE users.id IN (\n" +
+                   "    SELECT user_subscriptions.subscriber_id\n" +
+                   "    FROM user_subscriptions\n" +
+                   "    WHERE user_subscriptions.user_id = :authUserId\n" +
+                   ")",
+            nativeQuery = true)
+    <T> List<T> getSameFollowers(@Param("userId") Long userId, @Param("authUserId") Long authUserId, Class<T> responseType);
 }

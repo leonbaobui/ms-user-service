@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import com.twitter.ms.dto.request.UserRequest;
 import com.twitter.ms.dto.response.AuthResponse;
 import com.twitter.ms.dto.response.AuthUserResponse;
+import com.twitter.ms.dto.response.UserDetailResponse;
 import com.twitter.ms.dto.response.UserProfileResponse;
 import com.twitter.ms.service.AuthService;
 import com.twitter.ms.service.UserService;
@@ -30,6 +31,7 @@ import main.java.com.leon.baobui.dto.response.user.UserResponse;
 import main.java.com.leon.baobui.util.AuthUtil;
 
 import static main.java.com.leon.baobui.constants.PathConstants.ALL;
+import static main.java.com.leon.baobui.constants.PathConstants.DETAILS_USER_ID;
 import static main.java.com.leon.baobui.constants.PathConstants.SEARCH_USERNAME;
 import static main.java.com.leon.baobui.constants.PathConstants.START;
 import static main.java.com.leon.baobui.constants.PathConstants.TOKEN;
@@ -90,6 +92,11 @@ public class UserController {
             @PageableDefault(size = 15) Pageable pageable) {
         List<UserResponse> userResponses = userService.searchUsersByUsername(username, pageable);
         return ResponseEntity.ok(userResponses);
+    }
+
+    @GetMapping(DETAILS_USER_ID)
+    public ResponseEntity<UserDetailResponse> getUserDetails(@PathVariable("userId") Long userId) {
+        return ResponseEntity.ok(userService.getUserDetails(userId));
     }
 
 //    @GetMapping("/token")
