@@ -1,6 +1,7 @@
 package com.twitter.ms.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import com.twitter.ms.repository.BlockUserRepository;
@@ -11,6 +12,7 @@ import com.twitter.ms.repository.projection.NotificationUserProjection;
 import com.twitter.ms.repository.projection.TweetAdditionalInfoUserProjection;
 import com.twitter.ms.repository.projection.TweetAuthorProjection;
 import com.twitter.ms.repository.projection.UserProjection;
+import com.twitter.ms.service.helper.UserServiceHelper;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,7 @@ import static main.java.com.leon.baobui.constants.ErrorMessage.CHAT_PARTICIPANT_
 @RequiredArgsConstructor
 public class UserApiService {
     private final BasicMapper basicMapper;
+    private final UserServiceHelper userServiceHelper;
     private final UserRepository userRepository;
     private final BlockUserRepository blockUserRepository;
     private final FollowerUserRepository followerUserRepository;
@@ -104,9 +107,9 @@ public class UserApiService {
     }
 
     public ChatUserParticipantResponse getChatUserParticipant(Long userId) {
-        ChatUserParticipantProjection chatUserParticipantProjection =
-                userRepository.getUserById(userId, ChatUserParticipantProjection.class).get();
-        return basicMapper.convertToResponse(chatUserParticipantProjection, ChatUserParticipantResponse.class);
+        return userRepository.getUserById(userId, ChatUserParticipantProjection.class)
+                .map(chatUserParticipantProjection -> basicMapper.convertToResponse(chatUserParticipantProjection, ChatUserParticipantResponse.class)
+                ).orElseGet(() -> userServiceHelper.buildUnknownUser(userId));
     }
 
     public UserResponse getUserResponseById(Long userId) {

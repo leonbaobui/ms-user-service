@@ -12,6 +12,8 @@ import com.twitter.ms.repository.projection.SameFollower;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+
+import main.java.com.leon.baobui.dto.response.chat.ChatUserParticipantResponse;
 import main.java.com.leon.baobui.exception.ApiRequestException;
 import main.java.com.leon.baobui.util.AuthUtil;
 
@@ -64,5 +66,14 @@ public class UserServiceHelper {
     public List<SameFollower> getSameFollowers(Long userId) {
         Long authUserId = AuthUtil.getAuthenticatedUserId();
         return followerUserRepository.getSameFollowers(userId, authUserId, SameFollower.class);
+    }
+
+    public ChatUserParticipantResponse buildUnknownUser(Long userId) {
+        ChatUserParticipantResponse response = new ChatUserParticipantResponse();
+        response.setFullName("Unknown");
+        response.setAvatar("");
+        response.setUsername("Unknown");
+        response.setId(userId);
+        return response;
     }
 }
