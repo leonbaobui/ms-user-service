@@ -125,4 +125,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "WHERE user.id = :userId")
     void updateLikeCount(@Param("increaseCount") boolean increaseCount, @Param("userId") Long userId);
 
+    @Modifying
+    @Query("UPDATE User user SET user.notificationsCount = 0 WHERE user.id = :userId")
+    void resetNotificationCount(@Param("userId") Long userId);
 }

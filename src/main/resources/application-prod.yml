@@ -35,6 +35,10 @@ spring:
     username: ${POSTGRESQL_USERNAME}
     password: ${POSTGRESQL_PASSWORD}
     driverClassName: org.postgresql.Driver
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}
+    consumer:
+      group-id: user
   rabbitmq:
     addresses: amqps://${RABBITMQ_USERNAME}:${RABBITMQ_PASSWORD}@armadillo.rmq.cloudamqp.com/${RABBITMQ_USERNAME}
   data:
