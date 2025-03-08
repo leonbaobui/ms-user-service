@@ -1,0 +1,8 @@
+{
+  "type": "record",
+  "name": "UserKey",
+  "namespace": "com.twitter.ms.model",
+  "fields": [
+    {"name": "id", "type": "long"}
+  ]
+}
