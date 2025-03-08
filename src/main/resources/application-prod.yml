@@ -37,6 +37,11 @@ spring:
     driverClassName: org.postgresql.Driver
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}
+    properties:
+      schema.registry.url: ${SCHEMA_REGISTRY_SERVER}
+      auto.register.schemas: true
+      value.subject.name.strategy: io.confluent.kafka.serializers.subject.TopicNameStrategy
+      key.subject.name.strategy: io.confluent.kafka.serializers.subject.TopicNameStrategy
     producer:
       key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
