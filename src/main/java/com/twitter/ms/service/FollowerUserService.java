@@ -3,16 +3,17 @@ package com.twitter.ms.service;
 import lombok.RequiredArgsConstructor;
 import com.twitter.ms.exception.DataNotFoundException;
 import com.twitter.ms.model.User;
-import com.twitter.ms.producer.FollowerUserProducer;
 import com.twitter.ms.repository.FollowerUserRepository;
 import com.twitter.ms.repository.UserRepository;
 import com.twitter.ms.repository.projection.UserProjection;
 import com.twitter.ms.service.helper.UserServiceHelper;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import main.java.com.leon.baobui.dto.HeaderResponse;
 import main.java.com.leon.baobui.dto.request.NotificationRequest;
 import main.java.com.leon.baobui.dto.response.user.UserResponse;
@@ -28,7 +29,7 @@ public class FollowerUserService {
     private final UserRepository userRepository;
     private final UserServiceHelper userServiceHelper;
     private final AuthenticationService authenticationService;
-    private final FollowerUserProducer followerUserProducer;
+//    private final FollowerUserProducer followerUserProducer;
     private final BasicMapper basicMapper;
 
 
