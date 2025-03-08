@@ -8,6 +8,7 @@ WORKDIR /app
 # Copy Gradle executable and configuration files from ms-user-service
 COPY /gradle /app/gradle
 COPY /config /app/config
+COPY /libs /app/libs
 COPY build.gradle /app/
 
 # Copy source and resource files from ms-user-service
