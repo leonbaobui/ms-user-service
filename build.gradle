@@ -13,6 +13,7 @@ buildscript {
 
 plugins {
     id 'java'
+    id 'com.github.davidmc24.gradle.plugin.avro' version '1.8.0'
     id 'org.springframework.boot' version '3.2.2'
     id 'io.spring.dependency-management' version '1.1.4'
     id "org.flywaydb.flyway" version "9.22.3"
@@ -20,6 +21,16 @@ plugins {
     id 'pmd'
     id 'com.avast.gradle.docker-compose' version '0.14.11'
 }
+
+repositories {
+    maven {
+        url "https://packages.confluent.io/maven/"
+    }
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 
 group = 'com.twitter'
 version = '0.0.1-SNAPSHOT'
@@ -44,8 +55,16 @@ repositories {
 
 
 sourceSets {
+    main.java.srcDirs += "${buildDir}/generated/avro"
     main.java.srcDirs += "build/generated/sources/annotationProcessor/java/main"
 }
+
+tasks.named('generateAvroJava') {
+    source("${projectDir}/src/main/avro")
+    outputDir = file("${projectDir}/src/main/java/com/twitter/ms/event")
+}
+
+compileJava.dependsOn(generateAvroJava)
 
 dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
@@ -65,7 +84,10 @@ dependencies {
     implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
     implementation 'org.postgresql:postgresql:42.7.1'
     implementation 'org.springframework.kafka:spring-kafka:3.1.1'
-
+    implementation 'org.apache.avro:avro-maven-plugin:1.12.0'
+    implementation 'org.apache.avro:avro:1.11.0'
+    implementation 'io.confluent:kafka-avro-serializer:7.5.3'
+    implementation files("libs/lib-trans-outbox-0.0.1-SNAPSHOT-plain.jar")
     implementation 'org.springframework.security:spring-security-crypto'
 
     implementation 'org.springframework.boot:spring-boot-starter-actuator:3.2.1'
@@ -96,6 +118,12 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+}
+
+avro {
+    stringType = "String"
+    fieldVisibility = "PUBLIC"
+    createSetters = true
 }
 
 checkstyle {
