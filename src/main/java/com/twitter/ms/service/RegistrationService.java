@@ -2,9 +2,12 @@ package com.twitter.ms.service;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import com.lib.twitter.lib_trans_outbox.domain.OutboxEvent;
+import com.lib.twitter.lib_trans_outbox.service.TransactionOutboxService;
 import com.twitter.ms.dto.request.PasswordRegistrationRequest;
 import com.twitter.ms.dto.request.RegistrationRequest;
 import com.twitter.ms.dto.response.AuthResponse;
@@ -12,6 +15,8 @@ import com.twitter.ms.dto.response.RegistrationResponse;
 import com.twitter.ms.exception.RegistrationException;
 import com.twitter.ms.mapper.UserMapper;
 import com.twitter.ms.model.User;
+import com.twitter.ms.model.UserKey;
+import com.twitter.ms.model.UserValue;
 import com.twitter.ms.producer.AmqpProducer;
 import com.twitter.ms.repository.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -26,8 +31,10 @@ import main.java.com.leon.baobui.security.JwtProvider;
 @RequiredArgsConstructor
 @Slf4j
 public class RegistrationService {
+    private static final String TOPIC = "user-service.user.user-registered-event";
     private final UserRepository userRepository;
     private final AmqpProducer amqpProducer;
+    private final TransactionOutboxService transactionOutboxService;
     private final OtpService otpService;
     private final JwtProvider jwtProvider;
     private final PasswordEncoder passwordEncoder;
@@ -108,6 +115,19 @@ public class RegistrationService {
                 .orElseThrow(() -> new RegistrationException("Email", "Email/user not found", HttpStatus.FORBIDDEN));
         userRepository.updatePassword(passwordEncoder.encode(request.getPassword()), user.getId());
         userRepository.updateAccountStatus(true, user.getId());
+        var userValue = UserMapper.INSTANCE.userEntityToUserEventDTO(user);
+        var outboxEvent = OutboxEvent.<UserKey, UserValue>builder()
+                .eventType("user created")
+                .rootEntityType("User")
+                .rootEntityId(String.valueOf(userValue.getId()))
+                .idempotencyKey(UUID.randomUUID().toString())
+                .topic(TOPIC)
+                .key(UserKey.newBuilder()
+                        .setId(userValue.getId())
+                        .build())
+                .payload(userValue)
+                .build();
+        transactionOutboxService.saveEventToOutboxTable(outboxEvent);
         String accessToken = jwtProvider.createToken(user.getEmail(), "USER");
         return AuthResponse.builder()
                 .user(UserMapper.INSTANCE.userEntityToAuthUserDTO(user))
