@@ -5,6 +5,7 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import com.lib.twitter.lib_trans_outbox.domain.OutboxEvent;
 import com.lib.twitter.lib_trans_outbox.service.TransactionOutboxService;
+import com.twitter.ms.event.EventType;
 import com.twitter.ms.event.UserSubscriptionEvent;
 import com.twitter.ms.event.UserSubscriptionKey;
 import com.twitter.ms.exception.DataNotFoundException;
@@ -51,8 +52,10 @@ public class FollowerUserService {
         User authUser = authenticationService.getAuthenticatedUser(authUserId);
         userServiceHelper.checkIsUserBlocked(user, authUser);
         boolean hasUserFollowed = false;
-        // Don't confuse between subscribers and follower!
+        boolean isFollowing = false;
+
         if (followerUserRepository.isFollower(authUserId, userId)) {
+            isFollowing = true;
             authUser.getFollowers().remove(user);
             user.getSubscribers().remove(authUser);
         } else {
@@ -85,6 +88,7 @@ public class FollowerUserService {
                 .payload(UserSubscriptionEvent.newBuilder()
                         .setUserId(authUserId)
                         .setSubscriberId(userId)
+                        .setEventType(isFollowing ? EventType.DELETED : EventType.CREATED)
                         .build())
                 .build();
         transactionOutboxService.saveEventToOutboxTable(outboxEvent);

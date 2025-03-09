@@ -10,6 +10,14 @@
     {
       "name": "subscriber_id",
       "type": "long"
+    },
+    {
+      "name": "event_type",
+      "type": {
+        "type": "enum",
+        "name": "EventType",
+        "symbols": ["CREATED", "DELETED"]
+      }
     }
   ]
 }

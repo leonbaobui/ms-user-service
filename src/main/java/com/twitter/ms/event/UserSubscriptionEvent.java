@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 7356957845710091966L;
+  private static final long serialVersionUID = -6363747608477601366L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserSubscriptionEvent\",\"namespace\":\"com.twitter.ms.event\",\"fields\":[{\"name\":\"user_id\",\"type\":\"long\"},{\"name\":\"subscriber_id\",\"type\":\"long\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserSubscriptionEvent\",\"namespace\":\"com.twitter.ms.event\",\"fields\":[{\"name\":\"user_id\",\"type\":\"long\"},{\"name\":\"subscriber_id\",\"type\":\"long\"},{\"name\":\"event_type\",\"type\":{\"type\":\"enum\",\"name\":\"EventType\",\"symbols\":[\"CREATED\",\"DELETED\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -75,6 +75,7 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
 
   public long user_id;
   public long subscriber_id;
+  public com.twitter.ms.event.EventType event_type;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -87,10 +88,12 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
    * All-args constructor.
    * @param user_id The new value for user_id
    * @param subscriber_id The new value for subscriber_id
+   * @param event_type The new value for event_type
    */
-  public UserSubscriptionEvent(java.lang.Long user_id, java.lang.Long subscriber_id) {
+  public UserSubscriptionEvent(java.lang.Long user_id, java.lang.Long subscriber_id, com.twitter.ms.event.EventType event_type) {
     this.user_id = user_id;
     this.subscriber_id = subscriber_id;
+    this.event_type = event_type;
   }
 
   @Override
@@ -105,6 +108,7 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
     switch (field$) {
     case 0: return user_id;
     case 1: return subscriber_id;
+    case 2: return event_type;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -116,6 +120,7 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
     switch (field$) {
     case 0: user_id = (java.lang.Long)value$; break;
     case 1: subscriber_id = (java.lang.Long)value$; break;
+    case 2: event_type = (com.twitter.ms.event.EventType)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -152,6 +157,23 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
    */
   public void setSubscriberId(long value) {
     this.subscriber_id = value;
+  }
+
+  /**
+   * Gets the value of the 'event_type' field.
+   * @return The value of the 'event_type' field.
+   */
+  public com.twitter.ms.event.EventType getEventType() {
+    return event_type;
+  }
+
+
+  /**
+   * Sets the value of the 'event_type' field.
+   * @param value the value to set.
+   */
+  public void setEventType(com.twitter.ms.event.EventType value) {
+    this.event_type = value;
   }
 
   /**
@@ -197,6 +219,7 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
 
     private long user_id;
     private long subscriber_id;
+    private com.twitter.ms.event.EventType event_type;
 
     /** Creates a new Builder */
     private Builder() {
@@ -217,6 +240,10 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
         this.subscriber_id = data().deepCopy(fields()[1].schema(), other.subscriber_id);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
+      if (isValidValue(fields()[2], other.event_type)) {
+        this.event_type = data().deepCopy(fields()[2].schema(), other.event_type);
+        fieldSetFlags()[2] = other.fieldSetFlags()[2];
+      }
     }
 
     /**
@@ -232,6 +259,10 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
       if (isValidValue(fields()[1], other.subscriber_id)) {
         this.subscriber_id = data().deepCopy(fields()[1].schema(), other.subscriber_id);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.event_type)) {
+        this.event_type = data().deepCopy(fields()[2].schema(), other.event_type);
+        fieldSetFlags()[2] = true;
       }
     }
 
@@ -313,6 +344,46 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
       return this;
     }
 
+    /**
+      * Gets the value of the 'event_type' field.
+      * @return The value.
+      */
+    public com.twitter.ms.event.EventType getEventType() {
+      return event_type;
+    }
+
+
+    /**
+      * Sets the value of the 'event_type' field.
+      * @param value The value of 'event_type'.
+      * @return This builder.
+      */
+    public com.twitter.ms.event.UserSubscriptionEvent.Builder setEventType(com.twitter.ms.event.EventType value) {
+      validate(fields()[2], value);
+      this.event_type = value;
+      fieldSetFlags()[2] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'event_type' field has been set.
+      * @return True if the 'event_type' field has been set, false otherwise.
+      */
+    public boolean hasEventType() {
+      return fieldSetFlags()[2];
+    }
+
+
+    /**
+      * Clears the value of the 'event_type' field.
+      * @return This builder.
+      */
+    public com.twitter.ms.event.UserSubscriptionEvent.Builder clearEventType() {
+      event_type = null;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public UserSubscriptionEvent build() {
@@ -320,6 +391,7 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
         UserSubscriptionEvent record = new UserSubscriptionEvent();
         record.user_id = fieldSetFlags()[0] ? this.user_id : (java.lang.Long) defaultValue(fields()[0]);
         record.subscriber_id = fieldSetFlags()[1] ? this.subscriber_id : (java.lang.Long) defaultValue(fields()[1]);
+        record.event_type = fieldSetFlags()[2] ? this.event_type : (com.twitter.ms.event.EventType) defaultValue(fields()[2]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -356,6 +428,8 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
 
     out.writeLong(this.subscriber_id);
 
+    out.writeEnum(this.event_type.ordinal());
+
   }
 
   @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
@@ -367,8 +441,10 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
 
       this.subscriber_id = in.readLong();
 
+      this.event_type = com.twitter.ms.event.EventType.values()[in.readEnum()];
+
     } else {
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 3; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.user_id = in.readLong();
@@ -376,6 +452,10 @@ public class UserSubscriptionEvent extends org.apache.avro.specific.SpecificReco
 
         case 1:
           this.subscriber_id = in.readLong();
+          break;
+
+        case 2:
+          this.event_type = com.twitter.ms.event.EventType.values()[in.readEnum()];
           break;
 
         default:
