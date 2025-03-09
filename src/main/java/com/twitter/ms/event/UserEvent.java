@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.twitter.ms.model;
+package com.twitter.ms.event;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -13,26 +13,26 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class UserValue extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 971798716530548960L;
+public class UserEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = -3115214818538247365L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserValue\",\"namespace\":\"com.twitter.ms.model\",\"fields\":[{\"name\":\"id\",\"type\":\"long\"},{\"name\":\"about\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"activationCode\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"active\",\"type\":\"boolean\",\"default\":false},{\"name\":\"avatar\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"backgroundColor\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"DEFAULT\"},{\"name\":\"colorScheme\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"BLUE\"},{\"name\":\"birthday\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"country\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"countryCode\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"fullName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"gender\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"language\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"likeCount\",\"type\":\"int\",\"default\":0},{\"name\":\"location\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"mediaTweetCount\",\"type\":\"long\",\"default\":0},{\"name\":\"mutedDirectMessages\",\"type\":\"boolean\",\"default\":false},{\"name\":\"notificationsCount\",\"type\":\"long\",\"default\":0},{\"name\":\"mentionsCount\",\"type\":\"long\",\"default\":0},{\"name\":\"password\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"passwordResetCode\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"phone\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"pinnedTweetId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"privateProfile\",\"type\":\"boolean\",\"default\":false},{\"name\":\"profileCustomized\",\"type\":\"boolean\",\"default\":false},{\"name\":\"profileStarted\",\"type\":\"boolean\",\"default\":false},{\"name\":\"registrationDate\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"timestamp-millis\"},{\"name\":\"role\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"USER\"},{\"name\":\"authenticationProvider\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"tweetCount\",\"type\":\"long\",\"default\":0},{\"name\":\"unreadMessagesCount\",\"type\":\"long\",\"default\":0},{\"name\":\"username\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"wallpaper\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"website\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"createdAt\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"timestamp-millis\"},{\"name\":\"updatedAt\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"timestamp-millis\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserEvent\",\"namespace\":\"com.twitter.ms.event\",\"fields\":[{\"name\":\"id\",\"type\":\"long\"},{\"name\":\"about\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"activationCode\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"active\",\"type\":\"boolean\",\"default\":false},{\"name\":\"avatar\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"backgroundColor\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"DEFAULT\"},{\"name\":\"colorScheme\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"BLUE\"},{\"name\":\"birthday\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"country\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"countryCode\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"fullName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"gender\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"language\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"likeCount\",\"type\":\"int\",\"default\":0},{\"name\":\"location\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"mediaTweetCount\",\"type\":\"long\",\"default\":0},{\"name\":\"mutedDirectMessages\",\"type\":\"boolean\",\"default\":false},{\"name\":\"notificationsCount\",\"type\":\"long\",\"default\":0},{\"name\":\"mentionsCount\",\"type\":\"long\",\"default\":0},{\"name\":\"password\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"passwordResetCode\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"phone\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"pinnedTweetId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"privateProfile\",\"type\":\"boolean\",\"default\":false},{\"name\":\"profileCustomized\",\"type\":\"boolean\",\"default\":false},{\"name\":\"profileStarted\",\"type\":\"boolean\",\"default\":false},{\"name\":\"registrationDate\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"timestamp-millis\"},{\"name\":\"role\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"USER\"},{\"name\":\"authenticationProvider\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"tweetCount\",\"type\":\"long\",\"default\":0},{\"name\":\"unreadMessagesCount\",\"type\":\"long\",\"default\":0},{\"name\":\"username\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"wallpaper\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"website\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"createdAt\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"timestamp-millis\"},{\"name\":\"updatedAt\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"timestamp-millis\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
 
-  private static final BinaryMessageEncoder<UserValue> ENCODER =
+  private static final BinaryMessageEncoder<UserEvent> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<UserValue> DECODER =
+  private static final BinaryMessageDecoder<UserEvent> DECODER =
       new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<UserValue> getEncoder() {
+  public static BinaryMessageEncoder<UserEvent> getEncoder() {
     return ENCODER;
   }
 
@@ -40,7 +40,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<UserValue> getDecoder() {
+  public static BinaryMessageDecoder<UserEvent> getDecoder() {
     return DECODER;
   }
 
@@ -49,12 +49,12 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<UserValue> createDecoder(SchemaStore resolver) {
+  public static BinaryMessageDecoder<UserEvent> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this UserValue to a ByteBuffer.
+   * Serializes this UserEvent to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -63,60 +63,60 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
   }
 
   /**
-   * Deserializes a UserValue from a ByteBuffer.
+   * Deserializes a UserEvent from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a UserValue instance decoded from the given buffer
+   * @return a UserEvent instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static UserValue fromByteBuffer(
+  public static UserEvent fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
 
-  private long id;
-  private java.lang.String about;
-  private java.lang.String activationCode;
-  private boolean active;
-  private java.lang.String avatar;
-  private java.lang.String backgroundColor;
-  private java.lang.String colorScheme;
-  private java.lang.String birthday;
-  private java.lang.String country;
-  private java.lang.String countryCode;
-  private java.lang.String email;
-  private java.lang.String fullName;
-  private java.lang.String gender;
-  private java.lang.String language;
-  private int likeCount;
-  private java.lang.String location;
-  private long mediaTweetCount;
-  private boolean mutedDirectMessages;
-  private long notificationsCount;
-  private long mentionsCount;
-  private java.lang.String password;
-  private java.lang.String passwordResetCode;
-  private java.lang.Long phone;
-  private java.lang.Long pinnedTweetId;
-  private boolean privateProfile;
-  private boolean profileCustomized;
-  private boolean profileStarted;
-  private java.lang.String registrationDate;
-  private java.lang.String role;
-  private java.lang.String authenticationProvider;
-  private long tweetCount;
-  private long unreadMessagesCount;
-  private java.lang.String username;
-  private java.lang.String wallpaper;
-  private java.lang.String website;
-  private java.lang.String createdAt;
-  private java.lang.String updatedAt;
+  public long id;
+  public java.lang.String about;
+  public java.lang.String activationCode;
+  public boolean active;
+  public java.lang.String avatar;
+  public java.lang.String backgroundColor;
+  public java.lang.String colorScheme;
+  public java.lang.String birthday;
+  public java.lang.String country;
+  public java.lang.String countryCode;
+  public java.lang.String email;
+  public java.lang.String fullName;
+  public java.lang.String gender;
+  public java.lang.String language;
+  public int likeCount;
+  public java.lang.String location;
+  public long mediaTweetCount;
+  public boolean mutedDirectMessages;
+  public long notificationsCount;
+  public long mentionsCount;
+  public java.lang.String password;
+  public java.lang.String passwordResetCode;
+  public java.lang.Long phone;
+  public java.lang.Long pinnedTweetId;
+  public boolean privateProfile;
+  public boolean profileCustomized;
+  public boolean profileStarted;
+  public java.lang.String registrationDate;
+  public java.lang.String role;
+  public java.lang.String authenticationProvider;
+  public long tweetCount;
+  public long unreadMessagesCount;
+  public java.lang.String username;
+  public java.lang.String wallpaper;
+  public java.lang.String website;
+  public java.lang.String createdAt;
+  public java.lang.String updatedAt;
 
   /**
    * Default constructor.  Note that this does not initialize fields
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public UserValue() {}
+  public UserEvent() {}
 
   /**
    * All-args constructor.
@@ -158,7 +158,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
    * @param createdAt The new value for createdAt
    * @param updatedAt The new value for updatedAt
    */
-  public UserValue(java.lang.Long id, java.lang.String about, java.lang.String activationCode, java.lang.Boolean active, java.lang.String avatar, java.lang.String backgroundColor, java.lang.String colorScheme, java.lang.String birthday, java.lang.String country, java.lang.String countryCode, java.lang.String email, java.lang.String fullName, java.lang.String gender, java.lang.String language, java.lang.Integer likeCount, java.lang.String location, java.lang.Long mediaTweetCount, java.lang.Boolean mutedDirectMessages, java.lang.Long notificationsCount, java.lang.Long mentionsCount, java.lang.String password, java.lang.String passwordResetCode, java.lang.Long phone, java.lang.Long pinnedTweetId, java.lang.Boolean privateProfile, java.lang.Boolean profileCustomized, java.lang.Boolean profileStarted, java.lang.String registrationDate, java.lang.String role, java.lang.String authenticationProvider, java.lang.Long tweetCount, java.lang.Long unreadMessagesCount, java.lang.String username, java.lang.String wallpaper, java.lang.String website, java.lang.String createdAt, java.lang.String updatedAt) {
+  public UserEvent(java.lang.Long id, java.lang.String about, java.lang.String activationCode, java.lang.Boolean active, java.lang.String avatar, java.lang.String backgroundColor, java.lang.String colorScheme, java.lang.String birthday, java.lang.String country, java.lang.String countryCode, java.lang.String email, java.lang.String fullName, java.lang.String gender, java.lang.String language, java.lang.Integer likeCount, java.lang.String location, java.lang.Long mediaTweetCount, java.lang.Boolean mutedDirectMessages, java.lang.Long notificationsCount, java.lang.Long mentionsCount, java.lang.String password, java.lang.String passwordResetCode, java.lang.Long phone, java.lang.Long pinnedTweetId, java.lang.Boolean privateProfile, java.lang.Boolean profileCustomized, java.lang.Boolean profileStarted, java.lang.String registrationDate, java.lang.String role, java.lang.String authenticationProvider, java.lang.Long tweetCount, java.lang.Long unreadMessagesCount, java.lang.String username, java.lang.String wallpaper, java.lang.String website, java.lang.String createdAt, java.lang.String updatedAt) {
     this.id = id;
     this.about = about;
     this.activationCode = activationCode;
@@ -925,45 +925,45 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
   }
 
   /**
-   * Creates a new UserValue RecordBuilder.
-   * @return A new UserValue RecordBuilder
+   * Creates a new UserEvent RecordBuilder.
+   * @return A new UserEvent RecordBuilder
    */
-  public static com.twitter.ms.model.UserValue.Builder newBuilder() {
-    return new com.twitter.ms.model.UserValue.Builder();
+  public static com.twitter.ms.event.UserEvent.Builder newBuilder() {
+    return new com.twitter.ms.event.UserEvent.Builder();
   }
 
   /**
-   * Creates a new UserValue RecordBuilder by copying an existing Builder.
+   * Creates a new UserEvent RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new UserValue RecordBuilder
+   * @return A new UserEvent RecordBuilder
    */
-  public static com.twitter.ms.model.UserValue.Builder newBuilder(com.twitter.ms.model.UserValue.Builder other) {
+  public static com.twitter.ms.event.UserEvent.Builder newBuilder(com.twitter.ms.event.UserEvent.Builder other) {
     if (other == null) {
-      return new com.twitter.ms.model.UserValue.Builder();
+      return new com.twitter.ms.event.UserEvent.Builder();
     } else {
-      return new com.twitter.ms.model.UserValue.Builder(other);
+      return new com.twitter.ms.event.UserEvent.Builder(other);
     }
   }
 
   /**
-   * Creates a new UserValue RecordBuilder by copying an existing UserValue instance.
+   * Creates a new UserEvent RecordBuilder by copying an existing UserEvent instance.
    * @param other The existing instance to copy.
-   * @return A new UserValue RecordBuilder
+   * @return A new UserEvent RecordBuilder
    */
-  public static com.twitter.ms.model.UserValue.Builder newBuilder(com.twitter.ms.model.UserValue other) {
+  public static com.twitter.ms.event.UserEvent.Builder newBuilder(com.twitter.ms.event.UserEvent other) {
     if (other == null) {
-      return new com.twitter.ms.model.UserValue.Builder();
+      return new com.twitter.ms.event.UserEvent.Builder();
     } else {
-      return new com.twitter.ms.model.UserValue.Builder(other);
+      return new com.twitter.ms.event.UserEvent.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for UserValue instances.
+   * RecordBuilder for UserEvent instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<UserValue>
-    implements org.apache.avro.data.RecordBuilder<UserValue> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<UserEvent>
+    implements org.apache.avro.data.RecordBuilder<UserEvent> {
 
     private long id;
     private java.lang.String about;
@@ -1012,7 +1012,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.twitter.ms.model.UserValue.Builder other) {
+    private Builder(com.twitter.ms.event.UserEvent.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -1165,10 +1165,10 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
     }
 
     /**
-     * Creates a Builder by copying an existing UserValue instance
+     * Creates a Builder by copying an existing UserEvent instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.twitter.ms.model.UserValue other) {
+    private Builder(com.twitter.ms.event.UserEvent other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -1334,7 +1334,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setId(long value) {
+    public com.twitter.ms.event.UserEvent.Builder setId(long value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -1354,7 +1354,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearId() {
+    public com.twitter.ms.event.UserEvent.Builder clearId() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -1373,7 +1373,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'about'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setAbout(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setAbout(java.lang.String value) {
       validate(fields()[1], value);
       this.about = value;
       fieldSetFlags()[1] = true;
@@ -1393,7 +1393,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'about' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearAbout() {
+    public com.twitter.ms.event.UserEvent.Builder clearAbout() {
       about = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -1413,7 +1413,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'activationCode'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setActivationCode(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setActivationCode(java.lang.String value) {
       validate(fields()[2], value);
       this.activationCode = value;
       fieldSetFlags()[2] = true;
@@ -1433,7 +1433,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'activationCode' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearActivationCode() {
+    public com.twitter.ms.event.UserEvent.Builder clearActivationCode() {
       activationCode = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -1453,7 +1453,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'active'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setActive(boolean value) {
+    public com.twitter.ms.event.UserEvent.Builder setActive(boolean value) {
       validate(fields()[3], value);
       this.active = value;
       fieldSetFlags()[3] = true;
@@ -1473,7 +1473,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'active' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearActive() {
+    public com.twitter.ms.event.UserEvent.Builder clearActive() {
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -1492,7 +1492,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'avatar'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setAvatar(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setAvatar(java.lang.String value) {
       validate(fields()[4], value);
       this.avatar = value;
       fieldSetFlags()[4] = true;
@@ -1512,7 +1512,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'avatar' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearAvatar() {
+    public com.twitter.ms.event.UserEvent.Builder clearAvatar() {
       avatar = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -1532,7 +1532,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'backgroundColor'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setBackgroundColor(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setBackgroundColor(java.lang.String value) {
       validate(fields()[5], value);
       this.backgroundColor = value;
       fieldSetFlags()[5] = true;
@@ -1552,7 +1552,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'backgroundColor' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearBackgroundColor() {
+    public com.twitter.ms.event.UserEvent.Builder clearBackgroundColor() {
       backgroundColor = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -1572,7 +1572,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'colorScheme'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setColorScheme(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setColorScheme(java.lang.String value) {
       validate(fields()[6], value);
       this.colorScheme = value;
       fieldSetFlags()[6] = true;
@@ -1592,7 +1592,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'colorScheme' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearColorScheme() {
+    public com.twitter.ms.event.UserEvent.Builder clearColorScheme() {
       colorScheme = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -1612,7 +1612,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'birthday'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setBirthday(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setBirthday(java.lang.String value) {
       validate(fields()[7], value);
       this.birthday = value;
       fieldSetFlags()[7] = true;
@@ -1632,7 +1632,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'birthday' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearBirthday() {
+    public com.twitter.ms.event.UserEvent.Builder clearBirthday() {
       birthday = null;
       fieldSetFlags()[7] = false;
       return this;
@@ -1652,7 +1652,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'country'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setCountry(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setCountry(java.lang.String value) {
       validate(fields()[8], value);
       this.country = value;
       fieldSetFlags()[8] = true;
@@ -1672,7 +1672,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'country' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearCountry() {
+    public com.twitter.ms.event.UserEvent.Builder clearCountry() {
       country = null;
       fieldSetFlags()[8] = false;
       return this;
@@ -1692,7 +1692,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'countryCode'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setCountryCode(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setCountryCode(java.lang.String value) {
       validate(fields()[9], value);
       this.countryCode = value;
       fieldSetFlags()[9] = true;
@@ -1712,7 +1712,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'countryCode' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearCountryCode() {
+    public com.twitter.ms.event.UserEvent.Builder clearCountryCode() {
       countryCode = null;
       fieldSetFlags()[9] = false;
       return this;
@@ -1732,7 +1732,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'email'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setEmail(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setEmail(java.lang.String value) {
       validate(fields()[10], value);
       this.email = value;
       fieldSetFlags()[10] = true;
@@ -1752,7 +1752,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'email' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearEmail() {
+    public com.twitter.ms.event.UserEvent.Builder clearEmail() {
       email = null;
       fieldSetFlags()[10] = false;
       return this;
@@ -1772,7 +1772,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'fullName'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setFullName(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setFullName(java.lang.String value) {
       validate(fields()[11], value);
       this.fullName = value;
       fieldSetFlags()[11] = true;
@@ -1792,7 +1792,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'fullName' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearFullName() {
+    public com.twitter.ms.event.UserEvent.Builder clearFullName() {
       fullName = null;
       fieldSetFlags()[11] = false;
       return this;
@@ -1812,7 +1812,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'gender'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setGender(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setGender(java.lang.String value) {
       validate(fields()[12], value);
       this.gender = value;
       fieldSetFlags()[12] = true;
@@ -1832,7 +1832,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'gender' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearGender() {
+    public com.twitter.ms.event.UserEvent.Builder clearGender() {
       gender = null;
       fieldSetFlags()[12] = false;
       return this;
@@ -1852,7 +1852,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'language'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setLanguage(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setLanguage(java.lang.String value) {
       validate(fields()[13], value);
       this.language = value;
       fieldSetFlags()[13] = true;
@@ -1872,7 +1872,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'language' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearLanguage() {
+    public com.twitter.ms.event.UserEvent.Builder clearLanguage() {
       language = null;
       fieldSetFlags()[13] = false;
       return this;
@@ -1892,7 +1892,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'likeCount'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setLikeCount(int value) {
+    public com.twitter.ms.event.UserEvent.Builder setLikeCount(int value) {
       validate(fields()[14], value);
       this.likeCount = value;
       fieldSetFlags()[14] = true;
@@ -1912,7 +1912,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'likeCount' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearLikeCount() {
+    public com.twitter.ms.event.UserEvent.Builder clearLikeCount() {
       fieldSetFlags()[14] = false;
       return this;
     }
@@ -1931,7 +1931,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'location'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setLocation(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setLocation(java.lang.String value) {
       validate(fields()[15], value);
       this.location = value;
       fieldSetFlags()[15] = true;
@@ -1951,7 +1951,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'location' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearLocation() {
+    public com.twitter.ms.event.UserEvent.Builder clearLocation() {
       location = null;
       fieldSetFlags()[15] = false;
       return this;
@@ -1971,7 +1971,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'mediaTweetCount'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setMediaTweetCount(long value) {
+    public com.twitter.ms.event.UserEvent.Builder setMediaTweetCount(long value) {
       validate(fields()[16], value);
       this.mediaTweetCount = value;
       fieldSetFlags()[16] = true;
@@ -1991,7 +1991,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'mediaTweetCount' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearMediaTweetCount() {
+    public com.twitter.ms.event.UserEvent.Builder clearMediaTweetCount() {
       fieldSetFlags()[16] = false;
       return this;
     }
@@ -2010,7 +2010,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'mutedDirectMessages'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setMutedDirectMessages(boolean value) {
+    public com.twitter.ms.event.UserEvent.Builder setMutedDirectMessages(boolean value) {
       validate(fields()[17], value);
       this.mutedDirectMessages = value;
       fieldSetFlags()[17] = true;
@@ -2030,7 +2030,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'mutedDirectMessages' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearMutedDirectMessages() {
+    public com.twitter.ms.event.UserEvent.Builder clearMutedDirectMessages() {
       fieldSetFlags()[17] = false;
       return this;
     }
@@ -2049,7 +2049,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'notificationsCount'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setNotificationsCount(long value) {
+    public com.twitter.ms.event.UserEvent.Builder setNotificationsCount(long value) {
       validate(fields()[18], value);
       this.notificationsCount = value;
       fieldSetFlags()[18] = true;
@@ -2069,7 +2069,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'notificationsCount' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearNotificationsCount() {
+    public com.twitter.ms.event.UserEvent.Builder clearNotificationsCount() {
       fieldSetFlags()[18] = false;
       return this;
     }
@@ -2088,7 +2088,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'mentionsCount'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setMentionsCount(long value) {
+    public com.twitter.ms.event.UserEvent.Builder setMentionsCount(long value) {
       validate(fields()[19], value);
       this.mentionsCount = value;
       fieldSetFlags()[19] = true;
@@ -2108,7 +2108,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'mentionsCount' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearMentionsCount() {
+    public com.twitter.ms.event.UserEvent.Builder clearMentionsCount() {
       fieldSetFlags()[19] = false;
       return this;
     }
@@ -2127,7 +2127,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'password'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setPassword(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setPassword(java.lang.String value) {
       validate(fields()[20], value);
       this.password = value;
       fieldSetFlags()[20] = true;
@@ -2147,7 +2147,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'password' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearPassword() {
+    public com.twitter.ms.event.UserEvent.Builder clearPassword() {
       password = null;
       fieldSetFlags()[20] = false;
       return this;
@@ -2167,7 +2167,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'passwordResetCode'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setPasswordResetCode(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setPasswordResetCode(java.lang.String value) {
       validate(fields()[21], value);
       this.passwordResetCode = value;
       fieldSetFlags()[21] = true;
@@ -2187,7 +2187,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'passwordResetCode' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearPasswordResetCode() {
+    public com.twitter.ms.event.UserEvent.Builder clearPasswordResetCode() {
       passwordResetCode = null;
       fieldSetFlags()[21] = false;
       return this;
@@ -2207,7 +2207,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'phone'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setPhone(java.lang.Long value) {
+    public com.twitter.ms.event.UserEvent.Builder setPhone(java.lang.Long value) {
       validate(fields()[22], value);
       this.phone = value;
       fieldSetFlags()[22] = true;
@@ -2227,7 +2227,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'phone' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearPhone() {
+    public com.twitter.ms.event.UserEvent.Builder clearPhone() {
       phone = null;
       fieldSetFlags()[22] = false;
       return this;
@@ -2247,7 +2247,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'pinnedTweetId'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setPinnedTweetId(java.lang.Long value) {
+    public com.twitter.ms.event.UserEvent.Builder setPinnedTweetId(java.lang.Long value) {
       validate(fields()[23], value);
       this.pinnedTweetId = value;
       fieldSetFlags()[23] = true;
@@ -2267,7 +2267,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'pinnedTweetId' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearPinnedTweetId() {
+    public com.twitter.ms.event.UserEvent.Builder clearPinnedTweetId() {
       pinnedTweetId = null;
       fieldSetFlags()[23] = false;
       return this;
@@ -2287,7 +2287,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'privateProfile'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setPrivateProfile(boolean value) {
+    public com.twitter.ms.event.UserEvent.Builder setPrivateProfile(boolean value) {
       validate(fields()[24], value);
       this.privateProfile = value;
       fieldSetFlags()[24] = true;
@@ -2307,7 +2307,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'privateProfile' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearPrivateProfile() {
+    public com.twitter.ms.event.UserEvent.Builder clearPrivateProfile() {
       fieldSetFlags()[24] = false;
       return this;
     }
@@ -2326,7 +2326,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'profileCustomized'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setProfileCustomized(boolean value) {
+    public com.twitter.ms.event.UserEvent.Builder setProfileCustomized(boolean value) {
       validate(fields()[25], value);
       this.profileCustomized = value;
       fieldSetFlags()[25] = true;
@@ -2346,7 +2346,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'profileCustomized' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearProfileCustomized() {
+    public com.twitter.ms.event.UserEvent.Builder clearProfileCustomized() {
       fieldSetFlags()[25] = false;
       return this;
     }
@@ -2365,7 +2365,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'profileStarted'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setProfileStarted(boolean value) {
+    public com.twitter.ms.event.UserEvent.Builder setProfileStarted(boolean value) {
       validate(fields()[26], value);
       this.profileStarted = value;
       fieldSetFlags()[26] = true;
@@ -2385,7 +2385,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'profileStarted' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearProfileStarted() {
+    public com.twitter.ms.event.UserEvent.Builder clearProfileStarted() {
       fieldSetFlags()[26] = false;
       return this;
     }
@@ -2404,7 +2404,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'registrationDate'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setRegistrationDate(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setRegistrationDate(java.lang.String value) {
       validate(fields()[27], value);
       this.registrationDate = value;
       fieldSetFlags()[27] = true;
@@ -2424,7 +2424,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'registrationDate' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearRegistrationDate() {
+    public com.twitter.ms.event.UserEvent.Builder clearRegistrationDate() {
       registrationDate = null;
       fieldSetFlags()[27] = false;
       return this;
@@ -2444,7 +2444,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'role'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setRole(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setRole(java.lang.String value) {
       validate(fields()[28], value);
       this.role = value;
       fieldSetFlags()[28] = true;
@@ -2464,7 +2464,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'role' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearRole() {
+    public com.twitter.ms.event.UserEvent.Builder clearRole() {
       role = null;
       fieldSetFlags()[28] = false;
       return this;
@@ -2484,7 +2484,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'authenticationProvider'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setAuthenticationProvider(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setAuthenticationProvider(java.lang.String value) {
       validate(fields()[29], value);
       this.authenticationProvider = value;
       fieldSetFlags()[29] = true;
@@ -2504,7 +2504,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'authenticationProvider' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearAuthenticationProvider() {
+    public com.twitter.ms.event.UserEvent.Builder clearAuthenticationProvider() {
       authenticationProvider = null;
       fieldSetFlags()[29] = false;
       return this;
@@ -2524,7 +2524,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'tweetCount'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setTweetCount(long value) {
+    public com.twitter.ms.event.UserEvent.Builder setTweetCount(long value) {
       validate(fields()[30], value);
       this.tweetCount = value;
       fieldSetFlags()[30] = true;
@@ -2544,7 +2544,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'tweetCount' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearTweetCount() {
+    public com.twitter.ms.event.UserEvent.Builder clearTweetCount() {
       fieldSetFlags()[30] = false;
       return this;
     }
@@ -2563,7 +2563,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'unreadMessagesCount'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setUnreadMessagesCount(long value) {
+    public com.twitter.ms.event.UserEvent.Builder setUnreadMessagesCount(long value) {
       validate(fields()[31], value);
       this.unreadMessagesCount = value;
       fieldSetFlags()[31] = true;
@@ -2583,7 +2583,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'unreadMessagesCount' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearUnreadMessagesCount() {
+    public com.twitter.ms.event.UserEvent.Builder clearUnreadMessagesCount() {
       fieldSetFlags()[31] = false;
       return this;
     }
@@ -2602,7 +2602,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'username'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setUsername(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setUsername(java.lang.String value) {
       validate(fields()[32], value);
       this.username = value;
       fieldSetFlags()[32] = true;
@@ -2622,7 +2622,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'username' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearUsername() {
+    public com.twitter.ms.event.UserEvent.Builder clearUsername() {
       username = null;
       fieldSetFlags()[32] = false;
       return this;
@@ -2642,7 +2642,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'wallpaper'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setWallpaper(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setWallpaper(java.lang.String value) {
       validate(fields()[33], value);
       this.wallpaper = value;
       fieldSetFlags()[33] = true;
@@ -2662,7 +2662,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'wallpaper' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearWallpaper() {
+    public com.twitter.ms.event.UserEvent.Builder clearWallpaper() {
       wallpaper = null;
       fieldSetFlags()[33] = false;
       return this;
@@ -2682,7 +2682,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'website'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setWebsite(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setWebsite(java.lang.String value) {
       validate(fields()[34], value);
       this.website = value;
       fieldSetFlags()[34] = true;
@@ -2702,7 +2702,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'website' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearWebsite() {
+    public com.twitter.ms.event.UserEvent.Builder clearWebsite() {
       website = null;
       fieldSetFlags()[34] = false;
       return this;
@@ -2722,7 +2722,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'createdAt'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setCreatedAt(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setCreatedAt(java.lang.String value) {
       validate(fields()[35], value);
       this.createdAt = value;
       fieldSetFlags()[35] = true;
@@ -2742,7 +2742,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'createdAt' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearCreatedAt() {
+    public com.twitter.ms.event.UserEvent.Builder clearCreatedAt() {
       createdAt = null;
       fieldSetFlags()[35] = false;
       return this;
@@ -2762,7 +2762,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * @param value The value of 'updatedAt'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder setUpdatedAt(java.lang.String value) {
+    public com.twitter.ms.event.UserEvent.Builder setUpdatedAt(java.lang.String value) {
       validate(fields()[36], value);
       this.updatedAt = value;
       fieldSetFlags()[36] = true;
@@ -2782,7 +2782,7 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'updatedAt' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserValue.Builder clearUpdatedAt() {
+    public com.twitter.ms.event.UserEvent.Builder clearUpdatedAt() {
       updatedAt = null;
       fieldSetFlags()[36] = false;
       return this;
@@ -2790,9 +2790,9 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
 
     @Override
     @SuppressWarnings("unchecked")
-    public UserValue build() {
+    public UserEvent build() {
       try {
-        UserValue record = new UserValue();
+        UserEvent record = new UserEvent();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.Long) defaultValue(fields()[0]);
         record.about = fieldSetFlags()[1] ? this.about : (java.lang.String) defaultValue(fields()[1]);
         record.activationCode = fieldSetFlags()[2] ? this.activationCode : (java.lang.String) defaultValue(fields()[2]);
@@ -2840,8 +2840,8 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<UserValue>
-    WRITER$ = (org.apache.avro.io.DatumWriter<UserValue>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<UserEvent>
+    WRITER$ = (org.apache.avro.io.DatumWriter<UserEvent>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -2849,8 +2849,8 @@ public class UserValue extends org.apache.avro.specific.SpecificRecordBase imple
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<UserValue>
-    READER$ = (org.apache.avro.io.DatumReader<UserValue>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<UserEvent>
+    READER$ = (org.apache.avro.io.DatumReader<UserEvent>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {

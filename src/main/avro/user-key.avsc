@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "UserKey",
-  "namespace": "com.twitter.ms.model",
+  "namespace": "com.twitter.ms.event",
   "fields": [
     {"name": "id", "type": "long"}
   ]

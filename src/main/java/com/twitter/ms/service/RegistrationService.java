@@ -12,11 +12,11 @@ import com.twitter.ms.dto.request.PasswordRegistrationRequest;
 import com.twitter.ms.dto.request.RegistrationRequest;
 import com.twitter.ms.dto.response.AuthResponse;
 import com.twitter.ms.dto.response.RegistrationResponse;
+import com.twitter.ms.event.UserEvent;
+import com.twitter.ms.event.UserKey;
 import com.twitter.ms.exception.RegistrationException;
 import com.twitter.ms.mapper.UserMapper;
 import com.twitter.ms.model.User;
-import com.twitter.ms.model.UserKey;
-import com.twitter.ms.model.UserValue;
 import com.twitter.ms.producer.AmqpProducer;
 import com.twitter.ms.repository.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -115,17 +115,17 @@ public class RegistrationService {
                 .orElseThrow(() -> new RegistrationException("Email", "Email/user not found", HttpStatus.FORBIDDEN));
         userRepository.updatePassword(passwordEncoder.encode(request.getPassword()), user.getId());
         userRepository.updateAccountStatus(true, user.getId());
-        var userValue = UserMapper.INSTANCE.userEntityToUserEventDTO(user);
-        var outboxEvent = OutboxEvent.<UserKey, UserValue>builder()
+        var userEvent = UserMapper.INSTANCE.userEntityToUserEventDTO(user);
+        var outboxEvent = OutboxEvent.<UserKey, UserEvent>builder()
                 .eventType("user created")
                 .rootEntityType("User")
-                .rootEntityId(String.valueOf(userValue.getId()))
+                .rootEntityId(String.valueOf(userEvent.getId()))
                 .idempotencyKey(UUID.randomUUID().toString())
                 .topic(TOPIC)
                 .key(UserKey.newBuilder()
-                        .setId(userValue.getId())
+                        .setId(userEvent.getId())
                         .build())
-                .payload(userValue)
+                .payload(userEvent)
                 .build();
         transactionOutboxService.saveEventToOutboxTable(outboxEvent);
         String accessToken = jwtProvider.createToken(user.getEmail(), "USER");

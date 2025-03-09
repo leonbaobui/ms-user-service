@@ -63,8 +63,7 @@ public class UserService {
     }
 
     public String uploadImageUserProfile(MultipartFile multipartFile) {
-        String s3ImageUrl = imageClient.uploadImageUserProfile(multipartFile);
-        return s3ImageUrl;
+        return imageClient.uploadImageUserProfile(multipartFile);
     }
 
     @Transactional

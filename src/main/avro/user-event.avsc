@@ -1,7 +1,7 @@
 {
   "type": "record",
-  "name": "UserValue",
-  "namespace": "com.twitter.ms.model",
+  "name": "UserEvent",
+  "namespace": "com.twitter.ms.event",
   "fields": [
     {"name": "id", "type": "long"},
     {"name": "about", "type": ["null", "string"], "default": null},

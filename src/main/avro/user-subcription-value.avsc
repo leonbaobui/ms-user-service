@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "UserSubscriptionEvent",
+  "namespace": "com.twitter.ms.event",
+  "fields": [
+    {
+      "name": "user_id",
+      "type": "long"
+    },
+    {
+      "name": "subscriber_id",
+      "type": "long"
+    }
+  ]
+}

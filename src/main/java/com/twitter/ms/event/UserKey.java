@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.twitter.ms.model;
+package com.twitter.ms.event;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UserKey extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8107775398009199067L;
+  private static final long serialVersionUID = 3525296709047072503L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserKey\",\"namespace\":\"com.twitter.ms.model\",\"fields\":[{\"name\":\"id\",\"type\":\"long\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserKey\",\"namespace\":\"com.twitter.ms.event\",\"fields\":[{\"name\":\"id\",\"type\":\"long\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -73,7 +73,7 @@ public class UserKey extends org.apache.avro.specific.SpecificRecordBase impleme
     return DECODER.decode(b);
   }
 
-  private long id;
+  public long id;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -136,8 +136,8 @@ public class UserKey extends org.apache.avro.specific.SpecificRecordBase impleme
    * Creates a new UserKey RecordBuilder.
    * @return A new UserKey RecordBuilder
    */
-  public static com.twitter.ms.model.UserKey.Builder newBuilder() {
-    return new com.twitter.ms.model.UserKey.Builder();
+  public static com.twitter.ms.event.UserKey.Builder newBuilder() {
+    return new com.twitter.ms.event.UserKey.Builder();
   }
 
   /**
@@ -145,11 +145,11 @@ public class UserKey extends org.apache.avro.specific.SpecificRecordBase impleme
    * @param other The existing builder to copy.
    * @return A new UserKey RecordBuilder
    */
-  public static com.twitter.ms.model.UserKey.Builder newBuilder(com.twitter.ms.model.UserKey.Builder other) {
+  public static com.twitter.ms.event.UserKey.Builder newBuilder(com.twitter.ms.event.UserKey.Builder other) {
     if (other == null) {
-      return new com.twitter.ms.model.UserKey.Builder();
+      return new com.twitter.ms.event.UserKey.Builder();
     } else {
-      return new com.twitter.ms.model.UserKey.Builder(other);
+      return new com.twitter.ms.event.UserKey.Builder(other);
     }
   }
 
@@ -158,11 +158,11 @@ public class UserKey extends org.apache.avro.specific.SpecificRecordBase impleme
    * @param other The existing instance to copy.
    * @return A new UserKey RecordBuilder
    */
-  public static com.twitter.ms.model.UserKey.Builder newBuilder(com.twitter.ms.model.UserKey other) {
+  public static com.twitter.ms.event.UserKey.Builder newBuilder(com.twitter.ms.event.UserKey other) {
     if (other == null) {
-      return new com.twitter.ms.model.UserKey.Builder();
+      return new com.twitter.ms.event.UserKey.Builder();
     } else {
-      return new com.twitter.ms.model.UserKey.Builder(other);
+      return new com.twitter.ms.event.UserKey.Builder(other);
     }
   }
 
@@ -184,7 +184,7 @@ public class UserKey extends org.apache.avro.specific.SpecificRecordBase impleme
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.twitter.ms.model.UserKey.Builder other) {
+    private Builder(com.twitter.ms.event.UserKey.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -196,7 +196,7 @@ public class UserKey extends org.apache.avro.specific.SpecificRecordBase impleme
      * Creates a Builder by copying an existing UserKey instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.twitter.ms.model.UserKey other) {
+    private Builder(com.twitter.ms.event.UserKey other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -218,7 +218,7 @@ public class UserKey extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserKey.Builder setId(long value) {
+    public com.twitter.ms.event.UserKey.Builder setId(long value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -238,7 +238,7 @@ public class UserKey extends org.apache.avro.specific.SpecificRecordBase impleme
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.twitter.ms.model.UserKey.Builder clearId() {
+    public com.twitter.ms.event.UserKey.Builder clearId() {
       fieldSetFlags()[0] = false;
       return this;
     }

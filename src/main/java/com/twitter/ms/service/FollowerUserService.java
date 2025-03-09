@@ -1,6 +1,12 @@
 package com.twitter.ms.service;
 
+import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
+import com.lib.twitter.lib_trans_outbox.domain.OutboxEvent;
+import com.lib.twitter.lib_trans_outbox.service.TransactionOutboxService;
+import com.twitter.ms.event.UserSubscriptionEvent;
+import com.twitter.ms.event.UserSubscriptionKey;
 import com.twitter.ms.exception.DataNotFoundException;
 import com.twitter.ms.model.User;
 import com.twitter.ms.repository.FollowerUserRepository;
@@ -24,6 +30,7 @@ import main.java.com.leon.baobui.util.AuthUtil;
 @Service
 @RequiredArgsConstructor
 public class FollowerUserService {
+    private static final String TOPIC = "user-service.user.subscription-event";
     //    private final NotificationClient notificationClient;
     private final FollowerUserRepository followerUserRepository;
     private final UserRepository userRepository;
@@ -31,6 +38,7 @@ public class FollowerUserService {
     private final AuthenticationService authenticationService;
 //    private final FollowerUserProducer followerUserProducer;
     private final BasicMapper basicMapper;
+    private final TransactionOutboxService transactionOutboxService;
 
 
     // Need transactional so hibernate can help auto-save
@@ -62,6 +70,24 @@ public class FollowerUserService {
                 followerUserRepository.addFollowerRequest(authUserId, userId);
             }
         }
+
+        var outboxEvent = OutboxEvent.<UserSubscriptionKey, UserSubscriptionEvent>builder()
+                .eventType("created")
+                .rootEntityType("user_subscriptions")
+                .rootEntityId(String.valueOf(authUser.getId() + '-' + userId))
+                .idempotencyKey(UUID.randomUUID().toString())
+                .topic(TOPIC)
+                .key(UserSubscriptionKey.newBuilder()
+                        .setUserId(authUserId)
+                        .setSubscriberId(userId)
+                        .build()
+                )
+                .payload(UserSubscriptionEvent.newBuilder()
+                        .setUserId(authUserId)
+                        .setSubscriberId(userId)
+                        .build())
+                .build();
+        transactionOutboxService.saveEventToOutboxTable(outboxEvent);
 //        followerUserProducer.sendFollowUserEvent(user, authUser.getId(), hasUserFollowed);
         return hasUserFollowed;
     }

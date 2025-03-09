@@ -2,8 +2,8 @@ package com.twitter.ms.mapper;
 
 import com.twitter.ms.dto.request.RegistrationRequest;
 import com.twitter.ms.dto.response.AuthUserResponse;
+import com.twitter.ms.event.UserEvent;
 import com.twitter.ms.model.User;
-import com.twitter.ms.model.UserValue;
 import com.twitter.ms.security.oauth2.GoogleOAuth2User;
 
 import org.mapstruct.Mapper;
@@ -26,6 +26,6 @@ public interface UserMapper {
     @Mapping(target = "active", expression = "java(true)")
     User oauth2RegistrationRequestToUserDAO(GoogleOAuth2User googleOAuth2User);
 
-    UserValue userEntityToUserEventDTO(User user);
+    UserEvent userEntityToUserEventDTO(User user);
     AuthUserResponse userEntityToAuthUserDTO(User user);
 }
