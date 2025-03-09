@@ -61,7 +61,7 @@ sourceSets {
 
 tasks.named('generateAvroJava') {
     source("${projectDir}/src/main/avro")
-    outputDir = file("${projectDir}/src/main/java/com/twitter/ms/event")
+    outputDir = file("${projectDir}/src/main/java/")
 }
 
 compileJava.dependsOn(generateAvroJava)
