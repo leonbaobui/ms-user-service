@@ -11,12 +11,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GraphUserRepository extends Neo4jRepository<GraphUser, Long> {
-    @Query("""
-        MATCH (me:User)-[:FOLLOWS]->(friend:User)-[:FOLLOWS]->(suggested:User)
-        WHERE me.id = $userId AND NOT (me)-[:FOLLOWS]->(suggested)
-        AND me <> suggested
-        RETURN DISTINCT suggested
-        LIMIT 5
-    """)
+    @Query("MATCH (me:User)-[:FOLLOWS]->(friend:User)-[:FOLLOWS]->(suggested:User) " +
+           "WHERE me.id = $userId AND NOT (me)-[:FOLLOWS]->(suggested) " +
+           "AND me <> suggested " +
+           "RETURN DISTINCT suggested " +
+           "LIMIT 5 ")
     List<UserProjection> findSuggestedUsers(Long userId);
 }
