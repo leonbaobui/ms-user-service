@@ -10,6 +10,7 @@ import com.twitter.ms.dto.response.UserProfileResponse;
 import com.twitter.ms.exception.DataNotFoundException;
 import com.twitter.ms.feign.ImageClient;
 import com.twitter.ms.model.User;
+import com.twitter.ms.repository.GraphUserRepository;
 import com.twitter.ms.repository.UserRepository;
 import com.twitter.ms.repository.projection.AuthUserProjection;
 import com.twitter.ms.repository.projection.UserDetailProjection;
@@ -36,6 +37,7 @@ import static main.java.com.leon.baobui.constants.ErrorMessage.USER_NOT_FOUND;
 public class UserService {
     private final BasicMapper basicMapper;
     private final UserRepository userRepository;
+    private final GraphUserRepository graphUserRepository;
     private final ImageClient imageClient;
 
     @Transactional
@@ -98,5 +100,11 @@ public class UserService {
         UserDetailProjection userDetailProjection = userRepository.getUserById(userId, UserDetailProjection.class)
                 .orElseThrow(() -> new DataNotFoundException("userId", USER_NOT_FOUND, HttpStatus.NOT_FOUND));
         return basicMapper.convertToResponse(userDetailProjection, UserDetailResponse.class);
+    }
+
+    public List<UserResponse> getRelevantUsers() {
+        Long userId = AuthUtil.getAuthenticatedUserId();
+        List<UserProjection> userProjections = graphUserRepository.findSuggestedUsers(userId);
+        return basicMapper.convertToResponseList(userProjections, UserResponse.class);
     }
 }

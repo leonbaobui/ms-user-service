@@ -35,6 +35,11 @@ spring:
     username: ${POSTGRESQL_USERNAME}
     password: ${POSTGRESQL_PASSWORD}
     driverClassName: org.postgresql.Driver
+  neo4j:
+    uri: ${NEO4J_URI}
+    authentication:
+      username: ${NEO4J_USERNAME}
+      password: ${NEO4J_PASSWORD}
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}
     properties:

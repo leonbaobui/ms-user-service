@@ -32,6 +32,7 @@ import main.java.com.leon.baobui.util.AuthUtil;
 
 import static main.java.com.leon.baobui.constants.PathConstants.ALL;
 import static main.java.com.leon.baobui.constants.PathConstants.DETAILS_USER_ID;
+import static main.java.com.leon.baobui.constants.PathConstants.RELEVANT;
 import static main.java.com.leon.baobui.constants.PathConstants.SEARCH_USERNAME;
 import static main.java.com.leon.baobui.constants.PathConstants.START;
 import static main.java.com.leon.baobui.constants.PathConstants.TOKEN;
@@ -97,6 +98,11 @@ public class UserController {
     @GetMapping(DETAILS_USER_ID)
     public ResponseEntity<UserDetailResponse> getUserDetails(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(userService.getUserDetails(userId));
+    }
+
+    @GetMapping(RELEVANT)
+    public ResponseEntity<List<UserResponse>> getRelevantUsers() {
+        return ResponseEntity.ok(userService.getRelevantUsers());
     }
 
 //    @GetMapping("/token")
