@@ -106,7 +106,7 @@ public class UserService {
 
     public List<UserResponse> getRelevantUsers() {
         Long userId = AuthUtil.getAuthenticatedUserId();
-        List<UserProjection> userProjections = graphUserRepository.findSuggestedUsers(userId);
+        List<UserProjection> userProjections = graphUserRepository.findTop5SuggestedUsers(userId);
         return basicMapper.convertToResponseList(userProjections, UserResponse.class);
     }
 }
