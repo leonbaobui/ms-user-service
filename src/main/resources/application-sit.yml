@@ -6,45 +6,58 @@ management:
     web:
       exposure:
         include: '*'
-
 logging:
   level:
-    org:
-      springframework:
-        security: TRACE
-        security.oauth2: TRACE
-        security.web.authentication: TRACE
-        web: TRACE
-    org.springframework.web.filter.CommonsRequestLogging: TRACE
+    org.springframework.data.neo4j: DEBUG
+    org.neo4j.ogm.drivers.bolt.request: DEBUG
+    org.neo4j.ogm.session.transaction: DEBUG
+    org.neo4j.ogm.drivers.bolt.response: DEBUG
+    org.springframework.web.filter.CommonsRequestLogging: DEBUG
     org.springframework.web.HttpLogging: TRACE
     reactor.netty.http.server: TRACE
     reactor.netty.http.client: TRACE
 server:
-  port : 443
+  port : 8080
   forward-headers-strategy: framework
   servlet:
     context-path: /ms-user-service
 #hostname: ms-user-service:8081
 spring:
   config:
-    import: optional:file:.env.sit
+    import: optional:file:.env.prod
   application:
     name: ms-user-service
   flyway:
     enabled: false
-    baseline-on-migrate: false
   jpa:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-#      This config will override the flyway because it will drop the user schema flyway
-#      ddl-auto: create-drop
+  #      This config will override the flyway because it will drop the user schema flyway
+  #      ddl-auto: create-drop
   datasource:
     platform: postgres
-    url: jdbc:postgresql://dpg-cs5pmdd6l47c73f6t4cg-a.singapore-postgres.render.com/ms_user_service_sit
+    url: jdbc:postgresql://ep-cold-mud-a1zdq33b-pooler.ap-southeast-1.aws.neon.tech/ms_user_service?sslmode=require
     username: ${POSTGRESQL_USERNAME}
     password: ${POSTGRESQL_PASSWORD}
     driverClassName: org.postgresql.Driver
+  neo4j:
+    uri: ${NEO4J_URI}
+    authentication:
+      username: ${NEO4J_USERNAME}
+      password: ${NEO4J_PASSWORD}
+  kafka:
+    bootstrap-servers: "13.213.73.77:9092"
+    properties:
+      schema.registry.url: "13.213.73.77:8081"
+      auto.register.schemas: true
+      value.subject.name.strategy: io.confluent.kafka.serializers.subject.TopicNameStrategy
+      key.subject.name.strategy: io.confluent.kafka.serializers.subject.TopicNameStrategy
+    producer:
+      key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    consumer:
+      group-id: user
   rabbitmq:
     addresses: amqps://${RABBITMQ_USERNAME}:${RABBITMQ_PASSWORD}@armadillo.rmq.cloudamqp.com/${RABBITMQ_USERNAME}
   data:
@@ -84,19 +97,19 @@ jwt:
 service:
   gateway-url: ${MS_GATEWAY_URL}
 
-eureka:
-  instance:
-    hostname: ms-user-service-kfhc.onrender.com  # Public domain name
-    securePort: 443  # Standard HTTP port
-    securePortEnabled: true  # Enable if you're using HTTPS
-    nonSecurePortEnabled: false
-    preferIpAddress: false  # Use the hostname instead of the IP address
-    statusPageUrlPath: /actuator/info  # Default status page path
-    healthCheckUrlPath: /actuator/health  # Default health check path
-  client:
-    serviceUrl:
-      defaultZone: https://ms-eureka-server-cdam.onrender.com/eureka
-    fetch-registry: true
-    register-with-eureka: true
+#eureka:
+#  instance:
+#    hostname: ${MS_USER_HOST} # Public domain name
+#    securePort: 443  # Standard HTTP port
+#    securePortEnabled: true  # Enable if you're using HTTPS
+#    nonSecurePortEnabled: false
+#    preferIpAddress: false  # Use the hostname instead of the IP address
+#    statusPageUrlPath: /actuator/info  # Default status page path
+#    healthCheckUrlPath: /actuator/health  # Default health check path
+#  client:
+#    serviceUrl:
+#      defaultZone: "${MS_EUREKA_URL}/eureka"
+#    fetch-registry: true
+#    register-with-eureka: true
   # instance:
   #   hostname: ${EUREKA_HOST:localhost}
