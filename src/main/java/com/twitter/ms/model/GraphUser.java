@@ -1,6 +1,6 @@
 package com.twitter.ms.model;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-@Node
+@Node("User")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -104,7 +104,7 @@ public class GraphUser {
     private boolean profileStarted = false;
 
     @Property(name = "registration_date")
-    private LocalDateTime registrationDate = LocalDateTime.now();
+    private ZonedDateTime registrationDate = ZonedDateTime.now();
 
     @Property(name = "role")
     private String role = "USER";
@@ -128,10 +128,10 @@ public class GraphUser {
     private String website;
 
     @Property(name = "created_at")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private ZonedDateTime createdAt = ZonedDateTime.now();
 
     @Property(name = "updated_at")
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    private ZonedDateTime updatedAt = ZonedDateTime.now();
 
     @Relationship(type = "FOLLOWS", direction = Relationship.Direction.OUTGOING)
     private List<GraphUser> following = new ArrayList<>();

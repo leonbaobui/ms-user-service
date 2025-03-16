@@ -17,12 +17,14 @@ import com.twitter.ms.repository.projection.UserDetailProjection;
 import com.twitter.ms.repository.projection.UserPrincipalView;
 import com.twitter.ms.repository.projection.UserProfileView;
 import com.twitter.ms.repository.projection.UserProjection;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 import main.java.com.leon.baobui.dto.HeaderResponse;
 import main.java.com.leon.baobui.dto.response.user.UserPrincipalResponse;
 import main.java.com.leon.baobui.dto.response.user.UserResponse;
